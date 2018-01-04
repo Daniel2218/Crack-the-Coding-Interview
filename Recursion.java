@@ -1,52 +1,93 @@
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Recursion {
 
   public static void main(String args[]) {
+    // System.out.println(getFibNumber(5));
     // ArrayList<ArrayList<Integer>> subSets = new ArrayList<ArrayList<Integer>>();
-    // ArrayList<Integer> list = new ArrayList<Integer>();
-    // list.add(1);
-    // list.add(2);
-    // // list.add(3);
-    // // subSets.add(list);
     //
-    // // ArrayList<Integer> list1 = new ArrayList<Integer>();
-    // // list1.add(1);
-    // // list1.add(2);
-    // // list1.add(3);
-    // //
-    // //
-    // // subSets.add(list1);
+    ArrayList<Integer> list = new ArrayList<Integer>();
+    list.add(1);
+    list.add(2);
+    // list.add(3);
+    // subSets.add(list);
+    // ArrayList<Integer> list1 = new ArrayList<Integer>();
+    // list1.add(1);
+    // list1.add(2);
+    // list1.add(3);
+
+
+    // subSets.add(list1);
+    // getSubSets(list);
     // System.out.println(getSubSets(list));
-
-    // ArrayList<String> strings = permute("aba");
-    // subStrings("daata");
-    // System.out.println(isPalindrome(strings));
-
-    String trips [] = new String[3];
-    trips[0] = "10 2 5";
-    trips[1] = "12 4 4";
-    trips[2] = "6 2 2";
-    maximumCupcakes(trips);
+    // int arr [][] = new int[3][3];
+    // System.out.println(grid(arr, 0, 0));
+    // System.out.println("abc".substring(3, 3));
+    // System.out.println(permute("abcde"));
+    // System.out.println(permute("abcde").size());
+    // parenth(2);
+    System.out.println(makeChange(10, 25));
   }
 
-  private static int subStrings(String str) {
-    String sub;
-    int length = str.length();
-    int numOfPalins = 0;
+  // 8.1
+  // 1, 1. 2. 3, 5
+  private static int getFibNumber(int n) {
+    if(n <= 0) return -1;
 
-    for(int c = 0 ; c < length ; c++ ) {
-        for(int i = 1; i <= length - c; i++) {
-           sub = str.substring(c, c+i);
-           if(isPalindrome(sub)) {
-             numOfPalins++;
-           }
-        }
-     }
+    if(n == 2 || n == 1) {
+      return 1;
+    }
 
-    return numOfPalins;
+    return getFibNumber(n-1) + getFibNumber(n-2);
   }
 
+  // 8.2
+  private static int grid(int arr[][], int x, int y) {
+    int n = arr.length - 1;
+
+    if(x > n || y > n) {
+      return 0;
+    } else if(x == n && y == n) {
+      return 1;
+    } else {
+      int right = grid(arr, x + 1, y);
+      int down = grid(arr, x, y + 1);
+      return right + down;
+    }
+  }
+
+  // 8.3
+  private static ArrayList<ArrayList<Integer>> getSubSets(ArrayList<Integer> set) {
+    ArrayList<ArrayList<Integer>> allSubSets = new ArrayList<ArrayList<Integer>>();
+    int size = allSubSets.size();
+
+    if(set.isEmpty()) {
+      ArrayList<Integer> emptySet = new ArrayList<Integer>();
+      allSubSets.add(emptySet);
+    } else {
+      // clones array with last element removed
+      ArrayList<Integer> smallerSet = (ArrayList<Integer>) set.clone();
+      smallerSet.remove(size);
+
+      ArrayList<ArrayList<Integer>> smallerSubSets = getSubSets(smallerSet);
+      // System.out.println("Should be empty list of lists: " + smallerSubSets);
+      // adds all subset of the smaller set to the allSubsets
+      for(ArrayList<Integer> subset : smallerSubSets) {
+        // System.out.println("Should be empty list: " + subset);
+        allSubSets.add(subset);
+        // System.out.println("Should be [[]]: " + allSubSets);
+        subset.add(set.get(size));
+        // System.out.println("Should be [1]: " + subset);
+        allSubSets.add(subset);
+        // System.out.println("Should be [[], [1]]: " + allSubSets);
+      }
+    }
+
+    return allSubSets;
+  }
+
+  // 8.4
   private static ArrayList<String> permute(String str) {
     int length = str.length();
     ArrayList<String> allStrings = new ArrayList<String>();
@@ -70,70 +111,86 @@ public class Recursion {
     return allStrings;
   }
 
-  private static int isPalindrome(ArrayList<String> str) {
-    int length = str.size();
-    int numOfPalins = 0;
+  // 8.5
+  // private static ArrayList<String> parenth(int n) {
+  //   int j = 0;
+  //   ArrayList<String> allStrings = new ArrayList<String>();
+  //
+  //   if(n == 0) {
+  //     return allStrings;
+  //   } else if(n == 1){
+  //     allStrings.add("()");
+  //     return allStrings;
+  //   } else {
+  //     ArrayList<String> allStringsSmall = parenth(n - 1);
+  //     int length = allStringsSmall.get(0).length();
+  //     String newStr = "";
+  //     String target = "";
+  //     String before = "";
+  //     String after = "";
+  //
+  //     allStrings.add("()" + allStringsSmall.get(0));
+  //
+  //     for (String s : allStringsSmall) {
+  //       for(int i = 2; i <= length; i+=2) {
+  //         j = i - 2;
+  //         before = s.substring(0, j);
+  //         target = s.substring(j, i);
+  //         after  = s.substring(i, length);
+  //
+  //         newStr += before + "(" + target + ")" + after;
+  //         allStrings.add(newStr);
+  //         newStr = "";
+  //       }
+  //     }
+  //   }
+  //
+  //   return allStrings;
+  // }
 
-    for(int i = 0; i < length; i++) {
-      if(isPalindrome(str.get(i))) {
-        numOfPalins++;
+  // 8.5
+  private static void parenth(String str, int l, int r) {
+    if(l == 0 && r == 0) {
+      System.out.println(str);
+    } else {
+      if (l > 0) {
+        str += "(";
+        parenth(str, l - 1, r);
+      }
+      if(r > l) {
+        str += ")";
+        parenth(str,l, r - 1);
       }
     }
-
-    return numOfPalins;
   }
 
-  private static Boolean isPalindrome(String str) {
-    String reverse = new StringBuffer(str).reverse().toString();
-
-    if (str.equals(reverse)) {
-      return true;
-    }
-    return false;
+  private static void parenth(int n) {
+    parenth("",n,n);
   }
 
-  static int countPalindromes(String s) {
-        String sub;
-        int length = s.length();
-        int numOfPalins = 0;
-        ArrayList<String> strings = new ArrayList<String>();
-
-        for(int c = 0 ; c < length ; c++ ) {
-            for(int i = 1; i <= length - c; i++) {
-                sub = s.substring(c, c+i);
-
-                if(isPalindrome(sub)) {
-                    numOfPalins++;
-                }
-            }
-        }
-
-        return numOfPalins;
+  // 8.7
+  private static int makeChange(int n, int denom) {
+    int next_denom = 0;
+    switch (denom) {
+      case 25:
+        next_denom = 10;
+        break;
+      case 10:
+        next_denom = 5;
+        break;
+      case 5:
+        next_denom = 1;
+        break;
+      case 1:
+        return 1;
     }
 
-    static void maximumCupcakes(String[] trips) {
-      int length = trips.length;
-      int cost, wrappersRatio, cakes, money, numOfWraps;
-
-       for(int i = 0; i < length; i++) {
-         String[] splited = trips[i].split("\\s+");
-         cakes = 0;
-         numOfWraps = 0;
-
-         money         = Integer.parseInt(splited[0]);
-         cost          = Integer.parseInt(splited[1]);
-         wrappersRatio = Integer.parseInt(splited[2]);
-
-         cakes = money / cost;
-         money = money - (cost * cakes);
-         numOfWraps = cakes;
-
-         while (numOfWraps >= wrappersRatio) {
-           numOfWraps = numOfWraps - wrappersRatio;
-           cakes++;
-           numOfWraps++;
-         }
-         System.out.println(cakes);
+    int ways = 0;
+    for (int i = 0; i * denom <= n; i++) {
+      ways += makeChange(n - i * denom, next_denom);
     }
+    return ways;
   }
+
+
 }
