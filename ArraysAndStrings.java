@@ -1,15 +1,17 @@
 import java.util.ArrayDeque;
 import java.util.Deque;
 
-class ArrayAndStrings {
+class ArraysAndStrings {
     public static void main(String[] args) {
         int a = (int) 'a';
         int testArr[][] = new int[3][3];
         testArr = setTestArr(testArr);
 
-        System.out.println(isUnique("daniela"));
-        System.out.println(reverse("daniel"));
-        System.out.println(isAnagram("debit cArd1","bad credit1"));
+        // System.out.println(isUnique("daniel"));
+        System.out.println(isUnique2("daniela"));
+
+        // System.out.println(reverse("daniel"));
+        // System.out.println(isAnagram("debit cArd1","bad credit1"));
         // printArr(rotatedArr(testArr));
         // System.out.println(removeDups("ldaaaannniela"));
 
@@ -25,34 +27,36 @@ class ArrayAndStrings {
 
       int ascVal;
       int length = str.length();
-      Boolean tracker[] = new Boolean[256];
+      // java will initialized tracker with false for each of its entries
+      boolean tracker[] = new boolean[256];
 
-      for (int i = 0; i < length; ++i) {
-        ascVal = (int) str.charAt(i);
-
-        if(tracker[ascVal] == null) {
-          tracker[ascVal] = false;
-        } else if(tracker[ascVal] == true) {
-          return false;
-        }
-
+      for (int i = 0; i < length; i++) {
+        ascVal = str.charAt(i);
+        if(tracker[ascVal]) return false;
         tracker[ascVal] = true;
       }
       return true;
     }
 
     // using a bitVector
+    // we can save some space if we use a bitVector instead
+    // assume that only lowercase values are used
+    // How does this work?
+    // 1 << ascVal:
+    // The integer bitVector can be written in binary.
+    // Each entry in the binary number represents a letter. Therefore 1011 or 11 would indicate letter a,b and d.
+    // bitVector & (1 << ascVal):
+    // The result of this will be whatever bits in both vectors are turned on 1001 & 1100 = 1000.
+    // If we get a value greater then 0, then would mean that we have come across this letter in the past.
     public static Boolean isUnique2(String str) {
       if (str == null || str.isEmpty()) return false;
-      if (str.length() > 256) return false;
 
       int bitVector = 0;
-      for (int i = 0; i < str.length(); ++i) {
-          char ch = str.charAt(i);
-          if ((bitVector & (1 << ch)) > 0) return false;
-          else bitVector |= (1 << ch);
+      for (int i = 0; i < str.length(); i++) {
+          int ascVal = str.charAt(i) - 'a';
+          if ((bitVector & (1 << ascVal)) > 0) return false;
+          else bitVector |= (1 << ascVal);
       }
-
       return true;
     }
 
@@ -63,11 +67,11 @@ class ArrayAndStrings {
        int length = str.length();
        StringBuilder newStr = new StringBuilder();
 
-       for(int i = 0; i < length; ++i) {
+       for(int i = 0; i < length; i++) {
          stack.push(str.charAt(i));
        }
 
-       for(int i = 0; i < length; ++i) {
+       for(int i = 0; i < length; i++) {
          newStr.append(stack.pop());
        }
 
@@ -99,7 +103,7 @@ class ArrayAndStrings {
 
       if (w1Len != w2Len) return false;
 
-      for(int i = 0; i < w1Len; ++i) {
+      for(int i = 0; i < w1Len; i++) {
         ascValW1 = (int) w1.toLowerCase().charAt(i);
         ascValW2 = (int) w2.toLowerCase().charAt(i);
 
@@ -127,7 +131,7 @@ class ArrayAndStrings {
       int spacesCount = 0;
       int newLength = 0;
       // scan for number of spaces
-      for (int i = 0; i < str.length; ++i) {
+      for (int i = 0; i < str.length; i++) {
         if(str[i] == ' ') {
           spacesCount++;
         }
@@ -137,7 +141,7 @@ class ArrayAndStrings {
         * the space from the string we need two extra bytes for the rest.
       **/
       newLength = length + spacesCount * 2;
-      str[newLength] = "\0";
+      str[newLength] = '\0';
       --newLength;
 
       for (int i = length - 1; i >= 0; --i) {
