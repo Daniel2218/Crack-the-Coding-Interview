@@ -1,5 +1,3 @@
-package interview;
-
 import java.util.ArrayDeque;
 import java.util.Deque;
 
@@ -9,21 +7,27 @@ class ArrayAndStrings {
         int testArr[][] = new int[3][3];
         testArr = setTestArr(testArr);
 
-        // System.out.println(isUnique("daniela"));
-        // System.out.println(reverse("daniel"));
-        // System.out.println(isAnagram("debit cArd1","bad credit1"));
+        System.out.println(isUnique("daniela"));
+        System.out.println(reverse("daniel"));
+        System.out.println(isAnagram("debit cArd1","bad credit1"));
         // printArr(rotatedArr(testArr));
-        System.out.println(removeDups("ldaaaannniela"));
+        // System.out.println(removeDups("ldaaaannniela"));
 
     }
 
-    // 1.1
+    /**
+      * 1.1
+      * Implement an algorithm to determine if a string has all unique characters. What
+      * if you cannot use additional data structures? (Assume string is ASCII based.)
+    */
     public static Boolean isUnique(String str) {
-      Boolean tracker[] = new Boolean[256];
-      int length = str.length();
-      int ascVal;
+      if (str == null || str.isEmpty()) return false;
 
-      for (int i = 0; i < length; i++) {
+      int ascVal;
+      int length = str.length();
+      Boolean tracker[] = new Boolean[256];
+
+      for (int i = 0; i < length; ++i) {
         ascVal = (int) str.charAt(i);
 
         if(tracker[ascVal] == null) {
@@ -34,28 +38,44 @@ class ArrayAndStrings {
 
         tracker[ascVal] = true;
       }
+      return true;
+    }
+
+    // using a bitVector
+    public static Boolean isUnique2(String str) {
+      if (str == null || str.isEmpty()) return false;
+      if (str.length() > 256) return false;
+
+      int bitVector = 0;
+      for (int i = 0; i < str.length(); ++i) {
+          char ch = str.charAt(i);
+          if ((bitVector & (1 << ch)) > 0) return false;
+          else bitVector |= (1 << ch);
+      }
 
       return true;
     }
 
     // 1.2
+    // reverse a string
     public static String reverse(String str) {
        Deque<Character> stack = new ArrayDeque<Character>();
        int length = str.length();
-       String newStr = "";
+       StringBuilder newStr = new StringBuilder();
 
-       for(int i = 0; i < length; i++) {
+       for(int i = 0; i < length; ++i) {
          stack.push(str.charAt(i));
        }
 
-       for(int i = 0; i < length; i++) {
-         newStr += stack.pop();
+       for(int i = 0; i < length; ++i) {
+         newStr.append(stack.pop());
        }
 
-       return newStr;
+       return newStr.toString();
     }
 
     // 1.3
+    // an algorithm and write code to remove the duplicate characters in a string
     public static String removeDups(String s) {
       StringBuffer newStr = new StringBuffer();
       int length = s.length();
@@ -75,38 +95,25 @@ class ArrayAndStrings {
       int w1Len = w1.length();
       int w2Len = w2.length();
       int ascValW1, ascValW2;
-      Boolean tracker1[] = new Boolean[256];
-      Boolean tracker2[] = new Boolean[256];
+      Boolean tracker[] = new Boolean[256];
 
-      if (w1Len != w2Len) {
-        return false;
-      }
+      if (w1Len != w2Len) return false;
 
-      for(int i = 0; i < w1Len; i++) {
+      for(int i = 0; i < w1Len; ++i) {
         ascValW1 = (int) w1.toLowerCase().charAt(i);
         ascValW2 = (int) w2.toLowerCase().charAt(i);
 
-        if(!isLetter(ascValW1) || !isLetter(ascValW2)) {
-          return false;
-        }
-
-        tracker1[ascValW1] = true;
-        tracker2[ascValW2] = true;
+        tracker[ascValW2] = true;
       }
 
       for(int i = 0; i < w1Len; i++) {
         ascValW1 = (int) w1.toLowerCase().charAt(i);
 
-        if(tracker2[ascValW1] == null) {
+        if(tracker[ascValW1] == null) {
           return false;
         }
       }
-
       return true;
-    }
-
-    private static Boolean isLetter(int ascVal) {
-      return (ascVal >= 65 && ascVal <= 90) || (ascVal >= 97 && ascVal <= 122);
     }
 
     // 1.6
@@ -139,7 +146,6 @@ class ArrayAndStrings {
           int topRight = arr[layer][last];
           int botLeft  = arr[last][layer];
           int botRight = arr[layer][last];
-
         }
       }
 
