@@ -116,6 +116,41 @@ class ArrayAndStrings {
       return true;
     }
 
+    /** 1.5
+      * Write a method to replace all spaces in a string with'%20'. You may assume that
+      * the string has sufficient space at the end of the string to hold the additional
+      * characters, and that you are given the "true" length of the string. (Note: if
+      * implementing in Java, please use a character array so that you can perform this
+      * operation in place.)
+    **/
+    public static void replaceSpaces(char[] str, int length) {
+      int spacesCount = 0;
+      int newLength = 0;
+      // scan for number of spaces
+      for (int i = 0; i < str.length; ++i) {
+        if(str[i] == ' ') {
+          spacesCount++;
+        }
+      }
+
+      /** %20 takes up 3 bytes, therefore after removing
+        * the space from the string we need two extra bytes for the rest.
+      **/
+      newLength = length + spacesCount * 2;
+      str[newLength] = "\0";
+      --newLength;
+
+      for (int i = length - 1; i >= 0; --i) {
+         if (str[i] == ' ') {
+             str[newLength--] = '0';
+             str[newLength--] = '2';
+             str[newLength--] = '%';
+         } else {
+             str[newLength--] = str[i];
+         }
+       }
+    }
+
     // 1.6
     public static int[][] rotatedArr(int arr[][]) {
       int length = arr.length - 1;
