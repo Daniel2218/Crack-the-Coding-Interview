@@ -8,7 +8,11 @@ class ArraysAndStrings {
         testArr = setTestArr(testArr);
 
         // System.out.println(isUnique("daniel"));
-        System.out.println(isUnique2("daniela"));
+        // System.out.println(isUnique2("daniela"));
+
+        char[] charArr = "daniela".toCharArray();
+        removeDups(charArr);
+        System.out.println(charArr);
 
         // System.out.println(reverse("daniel"));
         // System.out.println(isAnagram("debit cArd1","bad credit1"));
@@ -38,16 +42,17 @@ class ArraysAndStrings {
       return true;
     }
 
-    // using a bitVector
-    // we can save some space if we use a bitVector instead
-    // assume that only lowercase values are used
-    // How does this work?
-    // 1 << ascVal:
-    // The integer bitVector can be written in binary.
-    // Each entry in the binary number represents a letter. Therefore 1011 or 11 would indicate letter a,b and d.
-    // bitVector & (1 << ascVal):
-    // The result of this will be whatever bits in both vectors are turned on 1001 & 1100 = 1000.
-    // If we get a value greater then 0, then would mean that we have come across this letter in the past.
+    /** using a bitVector
+      * we can save some space if we use a bitVector instead
+      * assume that only lowercase values are used
+      * How does this work?
+      * 1 << ascVal:
+      * The integer bitVector can be written in binary.
+      * Each entry in the binary number represents a letter. Therefore 1011 or 11 would indicate letter a,b and d.
+      * bitVector & (1 << ascVal):
+      * The result of this will be whatever bits in both vectors are turned on 1001 & 1100 = 1000.
+      * If we get a value greater then 0, then would mean that we have come across this letter in the past.
+    **/
     public static Boolean isUnique2(String str) {
       if (str == null || str.isEmpty()) return false;
 
@@ -80,18 +85,25 @@ class ArraysAndStrings {
 
     // 1.3
     // an algorithm and write code to remove the duplicate characters in a string
-    public static String removeDups(String s) {
-      StringBuffer newStr = new StringBuffer();
-      int length = s.length();
+    public static void removeDups(char[] s) {
+      if(s == null) return;
 
-      for (int i = 0; i < length; i++) {
-        String c = s.charAt(i) + "";
-        if(newStr.indexOf(c) == -1) {
-          newStr.append(c);
+      int length = s.length;
+
+      if (length < 2) return;
+      boolean tracker[] = new boolean[256];
+
+      tracker[s[0]] = true;
+      int tail = 1;
+
+      for(int i = 1; i < length; ++i) {
+        if(!tracker[s[i]]) {
+          s[tail] = s[i];
+          ++tail;
+          tracker[s[i]] = true;
         }
       }
-
-      return newStr.toString();
+      s[tail] = 0;
     }
 
     // 1.4
