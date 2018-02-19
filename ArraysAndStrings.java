@@ -4,19 +4,24 @@ import java.util.Deque;
 class ArraysAndStrings {
     public static void main(String[] args) {
         int a = (int) 'a';
-        int testArr[][] = new int[3][3];
+        int testArr[][] = new int[4][4];
         testArr = setTestArr(testArr);
 
         // System.out.println(isUnique("daniel"));
         // System.out.println(isUnique2("daniela"));
 
-        char[] charArr = "daniela".toCharArray();
-        removeDups(charArr);
-        System.out.println(charArr);
+        // char[] charArr = "daniela".toCharArray();
+        // removeDups(charArr);
+        // System.out.println(charArr);
 
         // System.out.println(reverse("daniel"));
-        // System.out.println(isAnagram("debit cArd1","bad credit1"));
-        // printArr(rotatedArr(testArr));
+        // System.out.println(isAnagram("hello","hell0"));
+
+        // Less Efficient
+        printArr(rotatedArr(testArr));
+
+        // More Efficient
+        printArr(rotatedArr2(testArr));
         // System.out.println(removeDups("ldaaaannniela"));
 
     }
@@ -185,24 +190,29 @@ class ArraysAndStrings {
       return newArr;
     }
 
+    // more efficient array swap
     public static int[][] rotatedArr2(int arr[][]) {
       int length = arr.length;
 
-      for(int layer = 0; layer <= length / 2; layer++) {
+      for(int layer = 0; layer < length / 2; layer++) {
         int first = layer;
         int last  = length - 1 - layer;
 
         for(int i = first; i < last; i++) {
-          int topLeft  = arr[layer][i];
-          int topRight = arr[layer][last];
-          int botLeft  = arr[last][layer];
-          int botRight = arr[layer][last];
+          int offset   = i - first;
+          int topLeft  = arr[first][i]; // save topLeft
+
+          arr[first][i] = arr[last - offset][first]; // topLeft = bottomRight
+          arr[last-offset][first] = arr[last][last - offset]; // bottomRight = bottomLeft
+          arr[last][last - offset] = arr[i][last]; // bottomLeft = topRight
+          arr[i][last] = topLeft; // topRight = topLeft
         }
       }
 
       return arr;
     }
 
+    // helper functions
     private static void printArr(int[][] arr) {
       int length = arr.length - 1;
 
