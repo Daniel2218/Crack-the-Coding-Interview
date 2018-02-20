@@ -41,7 +41,38 @@ class LinkedList {
 
       current = current.next;
     }
+  }
 
+  // without additional buffer
+  public void deleteDups2(Node current) {
+    Node prev = null;
+    Node head = current;
+    int n = 0;
+
+    while(current != null) {
+      boolean found = runner(head, current.data, n);
+
+      if(found) {
+        prev.next = current.next;
+      } else {
+        prev = current;
+      }
+
+      current = current.next;
+      n++;
+    }
+  }
+
+  private boolean runner(Node head, int data, int n) {
+    while(head != null && n > 0) {
+      if(head.data == data) {
+        return true;
+      }
+
+      head = head.next;
+      n--;
+    }
+    return false;
   }
 
   // 2.2
@@ -157,7 +188,7 @@ class LinkedList {
 
     // LinkedList newList = LinkedList.addLists(linkedList1, linkedList2);
 
-    linkedList2.deleteDups(linkedList2.head);
+    linkedList2.deleteDups2(linkedList2.head);
     // linkedList.nthToLast(4);
     // System.out.println(linkedList.fndNode(5).data);
     // linkedList.deleteInMiddle(linkedList.findNode(5));
