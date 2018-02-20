@@ -1,5 +1,6 @@
 import java.util.Random;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.ArrayList;
 
 class LinkedList {
@@ -24,24 +25,23 @@ class LinkedList {
     }
   }
 
-  // 2.1
-  public void deleteDups(){
-    HashMap map  = new HashMap<Integer, Boolean>();
-    Node before  = this.head;
-    Node current = this.head.next;
-
-    map.put(before.data, true);
+  /**
+    2.1: Write code to remove duplicates from an unsorted linked list
+  **/
+  public void deleteDups(Node current) {
+    HashSet set = new HashSet<Integer>();
+    Node previous = null;
 
     while(current != null) {
-      if(map.get(current.data) != null) {
-        before.next = current.next;
-        current = current.next;
+      if(!set.add(current.data)) {
+        previous.next = current.next;
       } else {
-        map.put(current.data, true);
-        before = before.next;
-        current = current.next;
+        previous = current;
       }
+
+      current = current.next;
     }
+
   }
 
   // 2.2
@@ -148,18 +148,20 @@ class LinkedList {
 
     LinkedList linkedList2 = new LinkedList();
     linkedList2.add(1);
+    linkedList2.add(2);
+    linkedList2.add(3);
     linkedList2.add(1);
-    linkedList2.add(1);
-    linkedList2.add(1);
+    linkedList2.add(8);
     linkedList2.add(2);
 
-    LinkedList newList = LinkedList.addLists(linkedList1, linkedList2);
 
-    // linkedList.deleteDups();
+    // LinkedList newList = LinkedList.addLists(linkedList1, linkedList2);
+
+    linkedList2.deleteDups(linkedList2.head);
     // linkedList.nthToLast(4);
-    // System.out.println(linkedList.findNode(5).data);
+    // System.out.println(linkedList.fndNode(5).data);
     // linkedList.deleteInMiddle(linkedList.findNode(5));
 
-    newList.print();
+    linkedList2.print();
   }
 }
