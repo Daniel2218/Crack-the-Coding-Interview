@@ -23,6 +23,11 @@ class ArraysAndStrings {
         // More Efficient
         // printArr(rotatedArr2(testArr));
         // System.out.println(removeDups("ldaaaannniela"));
+        // testArr[0][0] = 0;
+        // testArr[2][2] = 0;
+        //
+        // setZeroes(testArr);
+        // printArr(testArr);
 
         // System.out.println(isRotation("waterbottle","erbottlewat"));
     }
@@ -214,10 +219,37 @@ class ArraysAndStrings {
     }
 
     /**
+      * Write an algorithm such that if an element in an MxN matrix is 0, its entire row and
+      * column is set to 0
+    **/
+    public static void setZeroes(int[][] matrix) {
+      int[] rows = new int[matrix.length];
+      int[] cols = new int[matrix[0].length];
+
+      // first pass to find all the zeros
+      for(int col = 0; col < matrix[0].length; col++) {
+        for(int row = 0; row < matrix.length; row++) {
+          if(matrix[col][row] == 0) {
+            rows[row] = 1;
+            cols[col] = 1;
+          }
+        }
+      }
+
+      for(int col = 0; col < matrix[0].length; col++) {
+        for(int row = 0; row < matrix.length; row++) {
+          if(rows[row] == 1 || cols[col] == 1) {
+            matrix[col][row] = 0;
+          }
+        }
+      }
+    }
+
+
+    /**
       * 1.8
       * Assume  you  have  a  method  isSubstring  which  checks  if  one  word  is  a  substring  of
-      * another
-      * Given two strings, s1 and s2, write code to check if s2 is a rotation of s1 using
+      * another. Given two strings, s1 and s2, write code to check if s2 is a rotation of s1 using
       * only one call to isSubstring (i e
       *,“waterbottle” is a rotation of “erbottlewat”)
     **/
