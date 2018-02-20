@@ -7,29 +7,46 @@ class ArraysAndStrings {
         int testArr[][] = new int[4][4];
         testArr = setTestArr(testArr);
 
-        // System.out.println(isUnique("daniel"));
-        // System.out.println(isUnique2("daniela"));
+        System.out.println("Running 1.1: ");
+        System.out.println(isUnique("daniel"));
+        System.out.println(isUnique2("daniela"));
 
-        // char[] charArr = "daniela".toCharArray();
-        // removeDups(charArr);
-        // System.out.println(charArr);
+        System.out.println("Running 1.2: ");
+        System.out.println(reverse("daniel"));
 
-        // System.out.println(reverse("daniel"));
-        // System.out.println(isAnagram("hello","hell0"));
+        System.out.println("Running 1.3: ");
+        char[] charArr = "daniela".toCharArray();
+        removeDups(charArr);
+        System.out.println(charArr);
 
-        // Less Efficient
-        // printArr(rotatedArr(testArr));
+        System.out.println("Running 1.4: ");
+        System.out.println(isAnagram("credit card","car ctidder"));
 
-        // More Efficient
-        // printArr(rotatedArr2(testArr));
-        // System.out.println(removeDups("ldaaaannniela"));
-        // testArr[0][0] = 0;
-        // testArr[2][2] = 0;
-        //
-        // setZeroes(testArr);
-        // printArr(testArr);
+        System.out.println("Running 1.5: ");
+        char[] arr = new char[9];
+        arr[0] = 'h';
+        arr[1] = 'e';
+        arr[2] = 'l';
+        arr[3] = 'l';
+        arr[4] = 'o';
+        arr[5] = ' ';
+        replaceSpaces(arr, 6);
+        System.out.println(arr);
 
-        // System.out.println(isRotation("waterbottle","erbottlewat"));
+        System.out.println("Running 1.6: ");
+        printArr(rotatedArr(testArr));
+        System.out.println("Running 1.6  More Efficient: ");
+        printArr(rotatedArr2(testArr));
+
+        testArr[0][0] = 0;
+        testArr[2][2] = 0;
+
+        System.out.println("Running 1.7: ");
+        setZeroes(testArr);
+        printArr(testArr);
+
+        System.out.println("Running 1.8: ");
+        System.out.println(isRotation("waterbottle","erbottlewat"));
     }
 
     /**
@@ -154,7 +171,7 @@ class ArraysAndStrings {
       int spacesCount = 0;
       int newLength = 0;
       // scan for number of spaces
-      for (int i = 0; i < str.length; i++) {
+      for (int i = 0; i < length; i++) {
         if(str[i] == ' ') {
           spacesCount++;
         }
