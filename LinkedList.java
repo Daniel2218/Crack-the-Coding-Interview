@@ -100,16 +100,14 @@ class LinkedList {
 
   // 2.3
   // Note we assume that the node given will not be the tail or head of the LinkedList
-  public void deleteInMiddle(Node node) {
-    Node before = this.head;
-    Node current = this.head.next;
-
-    while(current != node) {
-      current = current.next;
-      before  = before.next;
+  public boolean deleteInMiddle(Node node) {
+    if(node == null || node.next = null) {
+      return false;
     }
 
-    before.next = current.next;
+    node.data = node.next.data;
+    node.next = node.next.next;
+    return true;
   }
 
   private Node findNode(int n) {
