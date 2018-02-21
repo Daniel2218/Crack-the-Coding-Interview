@@ -75,7 +75,7 @@ class LinkedList {
     return false;
   }
 
-  // 2.2
+  // 2.2: Implement an algorithm to find the nth to last element of a singly linked list
   public Node nthToLast(Node head, int n) {
       if(head == null || n < 1) {
         return null;
