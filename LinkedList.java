@@ -76,20 +76,26 @@ class LinkedList {
   }
 
   // 2.2
-  public Integer[] nthToLast(int n) {
-      Node current = this.head;
-      ArrayList<Integer> items = new ArrayList<Integer>();
-      int counter = 0;
-
-      while(current != null) {
-        if(++counter >= n) {
-          System.out.println(current.data);
-          items.add(current.data);
-        }
-        current = current.next;
+  public Node nthToLast(Node head, int n) {
+      if(head == null || n < 1) {
+        return null;
       }
 
-      return items.toArray(new Integer[items.size()]);
+      Node node1 = head;
+      Node node2 = head;
+
+      for(int i = 0; i < n - 1; i++) {
+        if(node2 == null) {
+          return null;
+        }
+        node2 = node2.next;
+      }
+
+      while(node2.next != null) {
+        node1 = node1.next;
+        node2 = node2.next;
+      }
+      return node1;
   }
 
   // 2.3
