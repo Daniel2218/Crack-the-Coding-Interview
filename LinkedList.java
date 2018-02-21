@@ -125,20 +125,14 @@ class LinkedList {
     return current;
   }
 
-  // 2.4
-  // assume that list1 and list2 have the same number for elemenets
+  /**
+    * 2.4:
+    * You have two numbers represented by a linked list, where each node contains a single digit
+    * The digits are stored in reverse order, such that the 1’s digit is at the head of the list
+    * Write a function that adds the two numbers and returns the sum as a linked list.
+  **/
   public static LinkedList addLists(LinkedList list1, LinkedList list2) {
-    LinkedList newList = new LinkedList();
-    Node current1 = list1.head;
-    Node current2 = list2.head;
 
-    while(current1 != null) {
-      newList.add(current1.data + current2.data);
-      current1 = current1.next;
-      current2 = current2.next;
-    }
-
-    return newList;
   }
 
   public void addRandomNodes(int amount) {
