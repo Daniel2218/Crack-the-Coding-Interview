@@ -101,7 +101,7 @@ class LinkedList {
   // 2.3
   // Note we assume that the node given will not be the tail or head of the LinkedList
   public boolean deleteInMiddle(Node node) {
-    if(node == null || node.next = null) {
+    if(node == null || node.next == null) {
       return false;
     }
 
@@ -131,8 +131,39 @@ class LinkedList {
     * The digits are stored in reverse order, such that the 1’s digit is at the head of the list
     * Write a function that adds the two numbers and returns the sum as a linked list.
   **/
-  public static LinkedList addLists(LinkedList list1, LinkedList list2) {
+  public Node addLists(Node node1, Node node2) {
+     Node newNode = null;
+     boolean prevOver10 = false;
 
+     while(node1 != null && node2 != null) {
+        int total = node1.data + node2.data;
+
+        if(prevOver10) {
+          total++;
+        }
+
+        prevOver10 = false;
+
+        int rounded = total % 10;
+
+        Node temp = new Node(rounded);
+        temp.next = newNode;
+        newNode = temp;
+
+        if(total >= 10) {
+          prevOver10 = true;
+        }
+
+        node1 = node1.next;
+        node2 = node2.next;
+     }
+
+     if((node1 == null && node2 != null) ||
+        (node2 == null && node1 != null)) {
+       return null;
+     }
+
+     return newNode;
   }
 
   public void addRandomNodes(int amount) {
@@ -169,28 +200,29 @@ class LinkedList {
 
   public static void main(String args[]) {
     LinkedList linkedList1 = new LinkedList();
+    linkedList1.add(3);
     linkedList1.add(1);
-    linkedList1.add(1);
-    linkedList1.add(1);
-    linkedList1.add(1);
-    linkedList1.add(1);
+    linkedList1.add(5);
 
     LinkedList linkedList2 = new LinkedList();
-    linkedList2.add(1);
-    linkedList2.add(2);
-    linkedList2.add(3);
-    linkedList2.add(1);
-    linkedList2.add(8);
+    linkedList2.add(5);
+    linkedList2.add(9);
     linkedList2.add(2);
 
+    Node newNode = linkedList1.addLists(linkedList1.head, linkedList2.head);
+
+    while(newNode != null) {
+      System.out.println(newNode.data);
+      newNode = newNode.next;
+    }
 
     // LinkedList newList = LinkedList.addLists(linkedList1, linkedList2);
 
-    linkedList2.deleteDups2(linkedList2.head);
+    // linkedList2.deleteDups2(linkedList2.head);
     // linkedList.nthToLast(4);
     // System.out.println(linkedList.fndNode(5).data);
     // linkedList.deleteInMiddle(linkedList.findNode(5));
 
-    linkedList2.print();
+    // linkedList2.print();
   }
 }
