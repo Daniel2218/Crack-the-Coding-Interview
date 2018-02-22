@@ -131,6 +131,8 @@ class LinkedList {
     * The digits are stored in reverse order, such that the 1’s digit is at the head of the list
     * Write a function that adds the two numbers and returns the sum as a linked list.
   **/
+
+  // interative approach
   public Node addLists(Node node1, Node node2) {
      Node newNode = null;
      boolean ifCarry = false;
@@ -163,6 +165,11 @@ class LinkedList {
      }
 
      return newNode;
+  }
+
+  // recursive approach
+  public Node addLists(Node node1, Node node2) {
+    return null;
   }
 
   public void addRandomNodes(int amount) {
