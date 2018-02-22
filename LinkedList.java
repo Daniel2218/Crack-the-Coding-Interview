@@ -133,16 +133,14 @@ class LinkedList {
   **/
   public Node addLists(Node node1, Node node2) {
      Node newNode = null;
-     boolean prevOver10 = false;
+     boolean ifCarry = false;
 
      while(node1 != null && node2 != null) {
         int total = node1.data + node2.data;
 
-        if(prevOver10) {
-          total++;
-        }
+        total += ifCarry ? 1 : 0;
 
-        prevOver10 = false;
+        ifCarry = false; // reset the carry after use
 
         int rounded = total % 10;
 
@@ -151,13 +149,14 @@ class LinkedList {
         newNode = temp;
 
         if(total >= 10) {
-          prevOver10 = true;
+          ifCarry = true;
         }
 
         node1 = node1.next;
         node2 = node2.next;
      }
 
+     // node1 and node2 are not of the same length
      if((node1 == null && node2 != null) ||
         (node2 == null && node1 != null)) {
        return null;
