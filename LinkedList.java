@@ -168,8 +168,28 @@ class LinkedList {
   }
 
   // recursive approach
-  public Node addLists(Node node1, Node node2) {
-    return null;
+  public Node addLists2(Node node1, Node node2, int carry) {
+    if(node1 == null && node2 ==  null) {
+      return null;
+    }
+
+    Node newNode = new Node(carry);
+    int total = carry;
+
+    if(node1 != null) {
+      total += node1.data;
+    }
+
+    if(node2 != null) {
+      total += node2.data;
+    }
+
+    newNode.data = total % 10;
+    Node more = addLists2(node1 == null ? null : node1.next,
+                          node2 == null ? null : node2.next,
+                          total > 10 ? 1 : 1);
+    newNode.next = more;
+    return newNode;
   }
 
   public void addRandomNodes(int amount) {
