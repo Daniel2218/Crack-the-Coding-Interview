@@ -198,20 +198,23 @@ class Chapter2 {
   }
 
   private static void print(Node node) {
-    while(newNode != null) {
-      System.out.print(newNode.data + " => ");
-      newNode = newNode.next;
+    System.out.println("");
+    while(node != null) {
+      System.out.print(node.data + " => ");
+      node = node.next;
     }
-    System.out.print("null");
+    System.out.println("null");
   }
 
   // main method contains test code for testing above functions
   public static void main(String args[]) {
+    Node n1, n2, n3, n4, n5;
+
     LinkedList linkedList1 = new LinkedList();
     linkedList1.add(3);
     linkedList1.add(1);
     linkedList1.add(5);
-    linkedList2.add(2);
+    linkedList1.add(5);
 
     LinkedList linkedList2 = new LinkedList();
     linkedList2.add(5);
@@ -220,21 +223,41 @@ class Chapter2 {
     linkedList2.add(2);
 
     // Question 2.1
+    System.out.println("Running 2.1: ");
+    deleteDups(linkedList1.head);
+    print(linkedList1.head);
 
-    linkedList2.deleteDups2(linkedList2.head);
+    System.out.println("Running 2.1 Version 2: ");
+    deleteDups2(linkedList2.head);
+    print(linkedList2.head);
 
     // Question 2.2
+    System.out.println("Running 2.2: ");
+    Node node = nthToLast(linkedList1.head, 1);
+    print(node);
+
     // Question 2.3
+    System.out.println("Running 2.3: ");
+    n1 = new Node(1);
+    n2 = new Node(2);
+    n3 = new Node(3);
+
+    n1.next = n2;
+    n2.next = n3;
+
+    deleteInMiddle(n2);
+    print(n1);
+
     // Question 2.4
     Node newNode = addLists(linkedList1.head, linkedList2.head);
-    print(newNode)l
+    print(newNode);
 
     // Question 2.5
-    Node n1 = new Node(1);
-    Node n2 = new Node(2);
-    Node n3 = new Node(3);
-    Node n4 = new Node(4);
-    Node n5 = new Node(5);
+    n1 = new Node(1);
+    n2 = new Node(2);
+    n3 = new Node(3);
+    n4 = new Node(4);
+    n5 = new Node(5);
 
     n1.next = n2;
     n2.next = n3;
@@ -243,26 +266,10 @@ class Chapter2 {
     n5.next = n3;
 
     Node startOfLoop = hasCycle(n1);
-
-    System.out.println("Running 2.1: ")
-
-
-
-
-
+    System.out.println("Running 2.5: ");
 
     if(startOfLoop != null) {
       System.out.println(startOfLoop.data);
     }
-
-
-    //
-    // LinkedList newList = LinkedList.addLists(linkedList1, linkedList2);
-    //
-    // linkedList.nthToLast(4);
-    // System.out.println(linkedList.fndNode(5).data);
-    // linkedList.deleteInMiddle(linkedList.findNode(5));
-    //
-    // linkedList2.print();
   }
 }
