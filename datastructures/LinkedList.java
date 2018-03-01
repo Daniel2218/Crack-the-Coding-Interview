@@ -5,6 +5,10 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.ArrayList;
 
+
+/**
+  A quick implemenation of a LinkedList
+**/
 public class LinkedList {
   public Node head;
   public int length;
