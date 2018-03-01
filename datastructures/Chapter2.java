@@ -198,7 +198,6 @@ class Chapter2 {
   }
 
   private static void print(Node node) {
-    System.out.println("");
     while(node != null) {
       System.out.print(node.data + " => ");
       node = node.next;
@@ -249,6 +248,7 @@ class Chapter2 {
     print(n1);
 
     // Question 2.4
+    System.out.println("Running 2.4: ");
     Node newNode = addLists(linkedList1.head, linkedList2.head);
     print(newNode);
 
