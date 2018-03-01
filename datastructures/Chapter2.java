@@ -197,6 +197,7 @@ class Chapter2 {
     return fastRunner;
   }
 
+  // main method contains test code for testing above functions
   public static void main(String args[]) {
     LinkedList linkedList1 = new LinkedList();
     linkedList1.add(3);
