@@ -197,20 +197,39 @@ class Chapter2 {
     return fastRunner;
   }
 
+  private static void print(Node node) {
+    while(newNode != null) {
+      System.out.print(newNode.data + " => ");
+      newNode = newNode.next;
+    }
+    System.out.print("null");
+  }
+
   // main method contains test code for testing above functions
   public static void main(String args[]) {
     LinkedList linkedList1 = new LinkedList();
     linkedList1.add(3);
     linkedList1.add(1);
     linkedList1.add(5);
+    linkedList2.add(2);
 
     LinkedList linkedList2 = new LinkedList();
     linkedList2.add(5);
     linkedList2.add(9);
     linkedList2.add(2);
+    linkedList2.add(2);
 
+    // Question 2.1
+
+    linkedList2.deleteDups2(linkedList2.head);
+
+    // Question 2.2
+    // Question 2.3
+    // Question 2.4
     Node newNode = addLists(linkedList1.head, linkedList2.head);
+    print(newNode)l
 
+    // Question 2.5
     Node n1 = new Node(1);
     Node n2 = new Node(2);
     Node n3 = new Node(3);
@@ -224,18 +243,22 @@ class Chapter2 {
     n5.next = n3;
 
     Node startOfLoop = hasCycle(n1);
+
+    System.out.println("Running 2.1: ")
+
+
+
+
+
+
     if(startOfLoop != null) {
       System.out.println(startOfLoop.data);
     }
 
-    // while(newNode != null) {
-    //   System.out.println(newNode.data);
-    //   newNode = newNode.next;
-    // }
+
     //
     // LinkedList newList = LinkedList.addLists(linkedList1, linkedList2);
     //
-    // linkedList2.deleteDups2(linkedList2.head);
     // linkedList.nthToLast(4);
     // System.out.println(linkedList.fndNode(5).data);
     // linkedList.deleteInMiddle(linkedList.findNode(5));
