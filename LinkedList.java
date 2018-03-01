@@ -192,7 +192,35 @@ class LinkedList {
     return newNode;
   }
 
-  public void addRandomNodes(int amount) {
+  public static Node hasCycle(Node head) {
+    Node slowRunner = head;
+    Node fastRunner = head;
+
+    // find meeting point if there is any
+    while(fastRunner.next != null) {
+      slowRunner = slowRunner.next;
+      fastRunner = fastRunner.next.next;
+      if(slowRunner == fastRunner) {
+        break;
+      }
+    }
+
+    // if there is no loop return null
+    if(fastRunner.next == null) {
+      return null;
+    }
+
+    slowRunner = head;
+    while(slowRunner != fastRunner) {
+      slowRunner = slowRunner.next;
+      fastRunner = fastRunner.next;
+    }
+
+    // does not matter which is returned
+    return fastRunner;
+  }
+
+  private void addRandomNodes(int amount) {
     Random r = new Random();
     int low = 1;
     int high = 100;
@@ -204,7 +232,7 @@ class LinkedList {
     }
   }
 
-  public void print() {
+  private void print() {
     Node current = this.head;
 
     while(current != null) {
@@ -213,7 +241,7 @@ class LinkedList {
     }
   }
 
-  class Node {
+  static class Node {
     public Node next;
     public int data;
 
@@ -237,10 +265,27 @@ class LinkedList {
 
     Node newNode = linkedList1.addLists(linkedList1.head, linkedList2.head);
 
-    while(newNode != null) {
-      System.out.println(newNode.data);
-      newNode = newNode.next;
+    Node n1 = new Node(1);
+    Node n2 = new Node(2);
+    Node n3 = new Node(3);
+    Node n4 = new Node(4);
+    Node n5 = new Node(5);
+
+    n1.next = n2;
+    n2.next = n3;
+    n3.next = n4;
+    n4.next = n5;
+    // n5.next = n3;
+
+    Node startOfLoop = hasCycle(n1);
+    if(startOfLoop != null) {
+      System.out.println(startOfLoop.data);
     }
+
+    // while(newNode != null) {
+    //   System.out.println(newNode.data);
+    //   newNode = newNode.next;
+    // }
 
     // LinkedList newList = LinkedList.addLists(linkedList1, linkedList2);
 
