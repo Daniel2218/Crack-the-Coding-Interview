@@ -1,7 +1,9 @@
+package datastructures;
+
 import java.util.ArrayDeque;
 import java.util.Deque;
 
-class ArraysAndStrings {
+class Chapter1 {
     public static void main(String[] args) {
         int a = (int) 'a';
         int testArr[][] = new int[4][4];
