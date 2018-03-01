@@ -1,34 +1,19 @@
+package datastructures;
+
 import java.util.Random;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.ArrayList;
+import datastructures.*;
 
-class LinkedList {
-  public Node head;
-  public int length;
+class Chapter2 {
 
-  public LinkedList() { }
-
-  public void add(int data) {
-    Node newNode = new Node(data);
-    Node current = this.head;
-
-    if(current == null) {
-      this.head = newNode;
-    } else {
-      while(current.next != null) {
-        current = current.next;
-      }
-
-      current.next = newNode;
-      ++this.length;
-    }
-  }
+  public Chapter2() { }
 
   /**
     2.1: Write code to remove duplicates from an unsorted linked list
   **/
-  public void deleteDups(Node current) {
+  public static void deleteDups(Node current) {
     HashSet set = new HashSet<Integer>();
     Node previous = null;
 
@@ -44,7 +29,7 @@ class LinkedList {
   }
 
   // without additional buffer
-  public void deleteDups2(Node current) {
+  public static void deleteDups2(Node current) {
     Node prev = null;
     Node head = current;
     int n = 0;
@@ -63,7 +48,7 @@ class LinkedList {
     }
   }
 
-  private boolean runner(Node head, int data, int n) {
+  private static boolean runner(Node head, int data, int n) {
     while(head != null && n > 0) {
       if(head.data == data) {
         return true;
@@ -76,7 +61,7 @@ class LinkedList {
   }
 
   // 2.2: Implement an algorithm to find the nth to last element of a singly linked list
-  public Node nthToLast(Node head, int n) {
+  public static Node nthToLast(Node head, int n) {
       if(head == null || n < 1) {
         return null;
       }
@@ -100,7 +85,7 @@ class LinkedList {
 
   // 2.3
   // Note we assume that the node given will not be the tail or head of the LinkedList
-  public boolean deleteInMiddle(Node node) {
+  public static boolean deleteInMiddle(Node node) {
     if(node == null || node.next == null) {
       return false;
     }
@@ -108,21 +93,6 @@ class LinkedList {
     node.data = node.next.data;
     node.next = node.next.next;
     return true;
-  }
-
-  private Node findNode(int n) {
-    Node current = this.head;
-    int i = 0;
-
-    while(++i < n) {
-      if(current == null) {
-        return null;
-      }
-
-      current = current.next;
-    }
-
-    return current;
   }
 
   /**
@@ -133,7 +103,7 @@ class LinkedList {
   **/
 
   // interative approach
-  public Node addLists(Node node1, Node node2) {
+  public static Node addLists(Node node1, Node node2) {
      Node newNode = null;
      boolean ifCarry = false;
 
@@ -168,7 +138,7 @@ class LinkedList {
   }
 
   // recursive approach
-  public Node addLists2(Node node1, Node node2, int carry) {
+  public static Node addLists2(Node node1, Node node2, int carry) {
     if(node1 == null && node2 ==  null) {
       return null;
     }
@@ -220,38 +190,6 @@ class LinkedList {
     return fastRunner;
   }
 
-  private void addRandomNodes(int amount) {
-    Random r = new Random();
-    int low = 1;
-    int high = 100;
-    int result;
-
-    for (int i = 0; i < amount; i++) {
-      result = r.nextInt(high - low) + low;
-      this.add(result);
-    }
-  }
-
-  private void print() {
-    Node current = this.head;
-
-    while(current != null) {
-      System.out.println(current.data);
-      current = current.next;
-    }
-  }
-
-  static class Node {
-    public Node next;
-    public int data;
-
-    public Node() { }
-
-    public Node(int data) {
-      this.data = data;
-    }
-  }
-
   public static void main(String args[]) {
     LinkedList linkedList1 = new LinkedList();
     linkedList1.add(3);
@@ -263,7 +201,7 @@ class LinkedList {
     linkedList2.add(9);
     linkedList2.add(2);
 
-    Node newNode = linkedList1.addLists(linkedList1.head, linkedList2.head);
+    Node newNode = addLists(linkedList1.head, linkedList2.head);
 
     Node n1 = new Node(1);
     Node n2 = new Node(2);
@@ -275,7 +213,7 @@ class LinkedList {
     n2.next = n3;
     n3.next = n4;
     n4.next = n5;
-    // n5.next = n3;
+    n5.next = n3;
 
     Node startOfLoop = hasCycle(n1);
     if(startOfLoop != null) {
@@ -286,14 +224,14 @@ class LinkedList {
     //   System.out.println(newNode.data);
     //   newNode = newNode.next;
     // }
-
+    //
     // LinkedList newList = LinkedList.addLists(linkedList1, linkedList2);
-
+    //
     // linkedList2.deleteDups2(linkedList2.head);
     // linkedList.nthToLast(4);
     // System.out.println(linkedList.fndNode(5).data);
     // linkedList.deleteInMiddle(linkedList.findNode(5));
-
+    //
     // linkedList2.print();
   }
 }
