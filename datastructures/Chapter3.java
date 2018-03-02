@@ -111,8 +111,12 @@ public class Chapter3 {
     return tree;
   }
 
-  // 4.4
-  public ArrayList<LinkedList<TreeNode>> createLists(TreeNode root) {
+  /**
+    * 4.4
+    * Given a binary search tree, design an algorithm which creates a linked list of all the
+    * nodes at each depth (i.e., if you have a tree with depth D, you’ll have D linked lists).
+  **/
+  public static ArrayList<LinkedList<TreeNode>> createLists(TreeNode root) {
     ArrayList<LinkedList<TreeNode>> result = new ArrayList<LinkedList<TreeNode>>();
     LinkedList<TreeNode> list = new LinkedList<TreeNode>();
     int level = 0;
@@ -144,6 +148,15 @@ public class Chapter3 {
     }
 
     return result;
+  }
+
+  private static void printListOfLinkedLists(ArrayList<LinkedList<TreeNode>> listOfNodes) {
+    for(LinkedList<TreeNode> list : listOfNodes) {
+      for(TreeNode node : list) {
+        System.out.print(node.data + " => ");
+      }
+      System.out.println("null");
+    }
   }
 
   public static void main(String args[]) {
@@ -185,26 +198,16 @@ public class Chapter3 {
 
     BTreePrinter.printNode(tree.root);
 
-    System.out.println("Running 1.1: ");
+    System.out.println("Running 4.1: ");
     System.out.println(isBalanced(tree.root));
 
-    System.out.println("Running 1.3: ");
+    System.out.println("Running 4.3: ");
     int[] sortedArr = new int[] { 1, 2, 3, 4, 5 };
     TreeNode node = createTree(sortedArr);
     BTreePrinter.printNode(bst.root);
 
-
-
-    // TreeNode bst;
-    // int arr[] = new int[6];
-    // arr[0] = 1;
-    // arr[1] = 2;
-    // arr[2] = 4;
-    // arr[3] = 5;
-    // arr[4] = 7;
-    // arr[5] = 9;
-    //
-    // bst = createTree(arr);
-    // BTreePrinter.printNode(bst);
+    System.out.println("Running 4.4: ");
+    ArrayList<LinkedList<TreeNode>> listOfNodes = createLists(tree.root);
+    // printListOfLinkedLists(listOfNodes);
   }
 }
