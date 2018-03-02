@@ -154,6 +154,17 @@ public class Chapter3 {
     tree.add(4);
     tree.add(5);
 
+    BinarySearchTree bst = new BinarySearchTree();
+    bst.add(1);
+    bst.add(5);
+    bst.add(4);
+    bst.add(-1);
+    bst.add(6);
+    bst.add(6);
+    bst.add(2);
+    bst.add(-3);
+    bst.add(0);
+
     System.out.println("\n Pre Order Transversal");
     tree.preOrder();
     System.out.println("");
@@ -173,20 +184,16 @@ public class Chapter3 {
     tree.DFS();
 
     BTreePrinter.printNode(tree.root);
+
     System.out.println("Running 1.1: ");
     System.out.println(isBalanced(tree.root));
 
-    // System.out.println("RUNNING");
-    // BinarySearchTree bst = new BinarySearchTree();
-    // bst.add(1);
-    // bst.add(5);
-    // bst.add(4);
-    // bst.add(-1);
-    // bst.add(6);
-    // bst.add(6);
-    // bst.add(2);
-    // bst.add(-3);
-    // bst.add(0);
+    System.out.println("Running 1.3: ");
+    int[] sortedArr = new int[] { 1, 2, 3, 4, 5 };
+    TreeNode node = createTree(sortedArr);
+    BTreePrinter.printNode(bst.root);
+
+
 
     // TreeNode bst;
     // int arr[] = new int[6];
