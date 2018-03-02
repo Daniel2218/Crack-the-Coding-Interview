@@ -20,6 +20,7 @@ public class BinaryTree {
     this.root = add(this.root, data);
   }
 
+  // BinaryTree insertion implementation
   private TreeNode add(TreeNode tree, int data) {
     if(tree == null) {
       tree = new TreeNode(data);
@@ -34,7 +35,8 @@ public class BinaryTree {
     return tree;
   }
 
-  private void BFS() {
+  // Breadth First Search implementation
+  public void BFS() {
     Queue<TreeNode> q = new LinkedList<TreeNode>();
     TreeNode node;
 
@@ -49,11 +51,25 @@ public class BinaryTree {
     }
   }
 
-  private void preOrder() {
+  // In-Order Transversal implementation
+  public void inOrder() {
+    inOrder(this.root);
+  }
+
+  public void inOrder(TreeNode tree) {
+    if(tree != null) {
+      inOrder(tree.left);
+      System.out.println(tree.data);
+      inOrder(tree.right);
+    }
+  }
+
+  // PreOrder Transversal implementation
+  public void preOrder() {
       preOrder(this.root);
   }
 
-  private void preOrder(TreeNode tree) {
+  public void preOrder(TreeNode tree) {
     if(tree != null) {
       System.out.println(tree.data);
       preOrder(tree.left);

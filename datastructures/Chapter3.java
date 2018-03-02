@@ -151,6 +151,9 @@ public class Chapter3 {
     System.out.println("Pre Order Transversal");
     tree.preOrder();
 
+    System.out.println("In-Order Transversal");
+    tree.inOrder();
+
     BTreePrinter.printNode(tree.root);
     System.out.println("Running 1.1: ");
     System.out.println(isBalanced(tree.root));
