@@ -54,12 +54,13 @@ public class BinaryTree {
   // In-Order Transversal implementation
   public void inOrder() {
     inOrder(this.root);
+    System.out.println("null");
   }
 
   public void inOrder(TreeNode tree) {
     if(tree != null) {
       inOrder(tree.left);
-      System.out.println(tree.data);
+      System.out.print(tree.data + " => ");
       inOrder(tree.right);
     }
   }
@@ -67,11 +68,12 @@ public class BinaryTree {
   // PreOrder Transversal implementation
   public void preOrder() {
       preOrder(this.root);
+      System.out.println("null");
   }
 
   public void preOrder(TreeNode tree) {
     if(tree != null) {
-      System.out.println(tree.data);
+      System.out.print(tree.data + " => ");
       preOrder(tree.left);
       preOrder(tree.right);
     }

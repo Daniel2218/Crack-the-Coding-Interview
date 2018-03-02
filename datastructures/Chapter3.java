@@ -139,20 +139,23 @@ public class Chapter3 {
 
   public static void main(String args[]) {
     BinaryTree tree = new BinaryTree();
-    tree.add(5);
+    tree.add(1);
+    tree.add(2);
     tree.add(3);
-    tree.add(6);
-    tree.add(7);
-    tree.add(8);
+    tree.add(4);
+    tree.add(5);
+
+    System.out.println("\n Pre Order Transversal");
+    tree.preOrder();
+    System.out.println("");
+
+    System.out.println("In-Order Transversal");
+    tree.inOrder();
+    System.out.println("");
 
     System.out.println("\n BFS Search: ");
     tree.BFS();
 
-    System.out.println("Pre Order Transversal");
-    tree.preOrder();
-
-    System.out.println("In-Order Transversal");
-    tree.inOrder();
 
     BTreePrinter.printNode(tree.root);
     System.out.println("Running 1.1: ");
