@@ -8,6 +8,9 @@ import interview.BinaryTree;
 import interview.TreeNode;
 import interview.BTreePrinter;
 
+/**
+  Basic implementation of a BinaryTree 
+**/
 public class BinaryTree {
   public TreeNode root;
   private int size;
