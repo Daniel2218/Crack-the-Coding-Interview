@@ -11,7 +11,12 @@ import java.util.Deque;
 
 public class Chapter3 {
 
-  // 4.1
+  /**
+    * 4.1
+    * Implement a function to check if a tree is balanced. For the purposes of this question,
+    * a balanced tree is defined to be a tree such that no two leaf nodes differ in distance
+    * from the root by more than one.
+  **/
   public static Boolean isBalanced(TreeNode root) {
     if (root == null) {
       return true;
@@ -82,7 +87,11 @@ public class Chapter3 {
   //   VISTED, UNVISTED, VISITING
   // }
 
-  // 4.3
+  /**
+    * 4.3
+    * Given a sorted (increasing order) array, write an algorithm to create a binary tree with
+    * minimal height.
+  **/
   public static TreeNode createTree(int sortedArr[]) {
     int length = sortedArr.length - 1;
     return createTree(sortedArr, 0, length);
