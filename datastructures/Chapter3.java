@@ -1,9 +1,11 @@
 package datastructures;
 
 import datastructures.*;
+import utils.BTreePrinter;
 
 import java.util.Queue;
 import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.ArrayDeque;
 import java.util.Deque;
 
@@ -101,11 +103,11 @@ public class Chapter3 {
   }
 
   // 4.4
-  public ArrayList<LinkedList<TreeNode>> createLists() {
+  public ArrayList<LinkedList<TreeNode>> createLists(TreeNode root) {
     ArrayList<LinkedList<TreeNode>> result = new ArrayList<LinkedList<TreeNode>>();
     LinkedList<TreeNode> list = new LinkedList<TreeNode>();
     int level = 0;
-    TreeNode current = this.root;
+    TreeNode current = root;
 
     list.add(current);
     result.add(level, list);
@@ -136,14 +138,14 @@ public class Chapter3 {
   }
 
   public static void main(String args[]) {
-    // BinaryTree tree = new BinaryTree();
-    // tree.add(5);
-    // tree.add(3);
-    // tree.add(6);
-    // tree.add(7);
-    // tree.add(8);
-    //
-    // BTreePrinter.printNode(tree.root);
+    BinaryTree tree = new BinaryTree();
+    tree.add(5);
+    tree.add(3);
+    tree.add(6);
+    tree.add(7);
+    tree.add(8);
+
+    BTreePrinter.printNode(tree.root);
     // System.out.println(tree.maxPath(tree.root));
     // System.out.println(tree.isBalanced());
     // System.out.println("BFS Search");

@@ -1,9 +1,10 @@
-package interview;
+package utils;
+
+import datastructures.TreeNode;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Collections;
-import interview.TreeNode;
 
 public class BTreePrinter {
 
