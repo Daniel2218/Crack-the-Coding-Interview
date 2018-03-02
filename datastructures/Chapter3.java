@@ -145,15 +145,15 @@ public class Chapter3 {
     tree.add(7);
     tree.add(8);
 
+    System.out.println("\n BFS Search: ");
+    tree.BFS();
+
+    System.out.println("Pre Order Transversal");
+    tree.preOrder();
+
     BTreePrinter.printNode(tree.root);
-    // System.out.println(tree.maxPath(tree.root));
-    // System.out.println(tree.isBalanced());
-    // System.out.println("BFS Search");
-    // tree.BFS();
-    // System.out.println("DFS Search");
-    // tree.DFS();
-    // System.out.println("Pre Order Transversal");
-    // tree.preOrder();
+    System.out.println("Running 1.1: ");
+    System.out.println(isBalanced(tree.root));
 
     // System.out.println("RUNNING");
     // BinarySearchTree bst = new BinarySearchTree();
