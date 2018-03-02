@@ -160,6 +160,9 @@ public class Chapter3 {
     System.out.println("\n BFS Search: ");
     tree.BFS();
 
+    System.out.println("\n DFS Search: ");
+    tree.DFS();
+
     BTreePrinter.printNode(tree.root);
     System.out.println("Running 1.1: ");
     System.out.println(isBalanced(tree.root));

@@ -44,10 +44,29 @@ public class BinaryTree {
 
     while(!q.isEmpty()) {
       node = q.remove();
-      System.out.println(node.data + " = Visted ");
+      System.out.println(node.data + " = Visted");
 
       if(node.left != null) q.add(node.left);
       if(node.right != null) q.add(node.right);
+    }
+  }
+
+  // Recursive Depth First Searh implementation
+  public void DFS() {
+    DFS(this.root);
+  }
+
+  public void DFS(TreeNode node) {
+    if(node != null) {
+      System.out.println(node.data + " = Visted");
+
+      if(node.left != null) {
+        DFS(node.left);
+      }
+
+      if(node.right != null) {
+        DFS(node.right);
+      }
     }
   }
 
