@@ -1,12 +1,11 @@
 package datastructures;
 
+import datastructures.*;
+
 import java.util.Queue;
 import java.util.LinkedList;
 import java.util.ArrayDeque;
 import java.util.Deque;
-import interview.BinaryTree;
-import interview.TreeNode;
-import interview.BTreePrinter;
 
 public class Chapter3 {
 

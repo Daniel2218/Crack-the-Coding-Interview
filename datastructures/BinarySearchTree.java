@@ -1,13 +1,13 @@
-package interview;
+package datastructures;
 
-import interview.TreeNode;
-import interview.BTreePrinter;
+import datastructures.*;
+
 import java.util.ArrayList;
 import java.util.Queue;
 import java.util.LinkedList;
 
 /**
-  Basic implementation of a BinarySearchTree 
+  Basic implementation of a BinarySearchTree
 **/
 public class BinarySearchTree {
   public TreeNode root;
