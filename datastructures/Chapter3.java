@@ -153,9 +153,12 @@ public class Chapter3 {
     tree.inOrder();
     System.out.println("");
 
+    System.out.println("Post-Order Transversal");
+    tree.postOrder();
+    System.out.println("");
+
     System.out.println("\n BFS Search: ");
     tree.BFS();
-
 
     BTreePrinter.printNode(tree.root);
     System.out.println("Running 1.1: ");

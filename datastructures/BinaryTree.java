@@ -79,6 +79,20 @@ public class BinaryTree {
     }
   }
 
+  // PostOrder Transversal implementation
+  public void postOrder() {
+      preOrder(this.root);
+      System.out.println("null");
+  }
+
+  public void postOrder(TreeNode tree) {
+    if(tree != null) {
+      preOrder(tree.left);
+      preOrder(tree.right);
+      System.out.print(tree.data + " => ");
+    }
+  }
+
   public int getSize() {
     return size;
   }
