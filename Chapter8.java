@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class Recursion {
+public class Chapter8 {
 
   public static void main(String args[]) {
     // System.out.println(getFibNumber(5));
@@ -12,7 +12,7 @@ public class Recursion {
     list.add(2);
     // list.add(3);
     // subSets.add(list);
-    // ArrayList<Integer> list1 = new ArrayList<Integer>();
+    // ArrayList<Integer> lis t1 = new ArrayList<Integer>();
     // list1.add(1);
     // list1.add(2);
     // list1.add(3);
