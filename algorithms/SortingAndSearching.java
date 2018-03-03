@@ -32,8 +32,13 @@ class SortingAndSearching {
     System.out.println(findValue(arr,1,2,2));
   }
 
-
-  // 9.5
+  /**
+    * 9.5
+    * Given a sorted array of strings which is interspersed with empty strings, write a method
+    * to find the location of a given string.
+    * Example: find “ball” in [“at”, “”, “”, “”, “ball”, “”, “”, “car”, “”, “”, “dad”, “”, “”] will return 4
+    * Example: find “ballcar” in [“at”, “”, “”, “”, “”, “ball”, “car”, “”, “”, “dad”, “”, “”] will return -1
+  **/
   public static int find(String arr[], String val) {
     return find(arr,val,0,arr.length);
   }
@@ -105,7 +110,11 @@ class SortingAndSearching {
     return -1;
   }
 
-  // 9.6
+  /**
+    * 9.6
+    * Given a matrix in which each row and each column is sorted, write a method to find
+    * an element in it.
+  **/
   public static Boolean findValue(int arr[][], int val, int m, int n) {
     int row = 0;
     int col = n - 1;
