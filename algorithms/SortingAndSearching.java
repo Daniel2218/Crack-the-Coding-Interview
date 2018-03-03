@@ -1,4 +1,4 @@
-package interview;
+package algorithms;
 
 import java.util.Deque;
 import java.util.ArrayDeque;

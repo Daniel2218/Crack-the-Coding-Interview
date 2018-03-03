@@ -1,35 +1,9 @@
+package algorithms;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class Chapter8 {
-
-  public static void main(String args[]) {
-    // System.out.println(getFibNumber(5));
-    // ArrayList<ArrayList<Integer>> subSets = new ArrayList<ArrayList<Integer>>();
-    //
-    ArrayList<Integer> list = new ArrayList<Integer>();
-    list.add(1);
-    list.add(2);
-    // list.add(3);
-    // subSets.add(list);
-    // ArrayList<Integer> lis t1 = new ArrayList<Integer>();
-    // list1.add(1);
-    // list1.add(2);
-    // list1.add(3);
-
-
-    // subSets.add(list1);
-    // getSubSets(list);
-    // System.out.println(getSubSets(list));
-    // int arr [][] = new int[3][3];
-    // System.out.println(grid(arr, 0, 0));
-    // System.out.println("abc".substring(3, 3));
-    // System.out.println(permute("abcde"));
-    // System.out.println(permute("abcde").size());
-    // parenth(2);
-    System.out.println(makeChange(10, 25));
-  }
-
   /**
     * 8.1
     * Write a method to generate the nth Fibonacci number
@@ -178,5 +152,40 @@ public class Chapter8 {
       ways += makeChange(n - i * denom, next_denom);
     }
     return ways;
+  }
+
+  public static void main(String args[]) {
+    ArrayList<ArrayList<Integer>> subSets = new ArrayList<ArrayList<Integer>>();
+    ArrayList<Integer> list1 = new ArrayList<Integer>();
+    list1.add(1);
+    list1.add(2);
+    list1.add(3);
+    subSets.add(list1);
+
+    ArrayList<Integer> list2 = new ArrayList<Integer>();
+    list2.add(1);
+    list2.add(2);
+    list2.add(3);
+    subSets.add(list2);
+
+    int arr[][] = new int[3][3];
+
+    System.out.println("Running 8.1: ");
+    System.out.println(getFibNumber(5));
+
+    System.out.println("Running 8.2: ");
+    // System.out.println(grid(arr, 0, 0));
+
+    System.out.println("Running 8.3: ");
+    System.out.println(getSubSets(list));
+
+    System.out.println("Running 8.4: ");
+    System.out.println(permute("abcde"));
+
+    System.out.println("Running 8.5: ");
+    parenth(4);
+
+    System.out.println("Running 8.7: ");
+    System.out.println(makeChange(10, 25));
   }
 }

@@ -1,5 +1,4 @@
-//Class implementing the MergeSort algorithm with generic types
-// Revised by Doina January 2014
+package algorithms;
 
 import java.lang.*;
 
