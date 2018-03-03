@@ -3,35 +3,7 @@ package algorithms;
 import java.util.Deque;
 import java.util.ArrayDeque;
 
-class SortingAndSearching {
-
-  public static void main(String args[]) {
-    // String arr[] = new String[13];
-    // arr[0]  = "at";
-    // arr[1]  = "";
-    // arr[2]  = "";
-    // arr[3]  = "";
-    // arr[4]  = "ball";
-    // arr[5]  = "";
-    // arr[6]  = "";
-    // arr[7]  = "car";
-    // arr[8]  = "";
-    // arr[9]  = "";
-    // arr[10] = "dad";
-    // arr[11] = "";
-    // arr[12] = "";
-    //
-    // System.out.println(find(arr,"ballcar"));
-
-    int arr[][] = new int[2][2];
-    arr[0][0]  = 1;
-    arr[0][1]  = 2;
-    arr[1][0]  = 3;
-    arr[1][1]  = 4;
-
-    System.out.println(findValue(arr,1,2,2));
-  }
-
+class Chapter9 {
   /**
     * 9.5
     * Given a sorted array of strings which is interspersed with empty strings, write a method
@@ -132,5 +104,34 @@ class SortingAndSearching {
     }
 
     return false;
+  }
+
+  public static void main(String args[]) {
+    String arr[] = new String[13];
+    arr[0]  = "at";
+    arr[1]  = "";
+    arr[2]  = "";
+    arr[3]  = "";
+    arr[4]  = "ball";
+    arr[5]  = "";
+    arr[6]  = "";
+    arr[7]  = "car";
+    arr[8]  = "";
+    arr[9]  = "";
+    arr[10] = "dad";
+    arr[11] = "";
+    arr[12] = "";
+
+    System.out.println("Running 9.5");
+    System.out.println(find(arr,"ballcar"));
+
+    arr[][] = new int[2][2];
+    arr[0][0]  = 1;
+    arr[0][1]  = 2;
+    arr[1][0]  = 3;
+    arr[1][1]  = 4;
+
+    System.out.println("Running 9.6");
+    System.out.println(findValue(arr,1,2,2));
   }
 }
