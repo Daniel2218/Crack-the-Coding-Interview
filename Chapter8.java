@@ -30,8 +30,10 @@ public class Chapter8 {
     System.out.println(makeChange(10, 25));
   }
 
-  // 8.1
-  // 1, 1. 2. 3, 5
+  /**
+    * 8.1
+    * Write a method to generate the nth Fibonacci number
+  **/
   private static int getFibNumber(int n) {
     if(n <= 0) return -1;
 
@@ -42,7 +44,12 @@ public class Chapter8 {
     return getFibNumber(n-1) + getFibNumber(n-2);
   }
 
-  // 8.2
+  /**
+    * 8.2
+    * Imagine a robot sitting on the upper left hand corner of an NxN grid. The robot can
+    * only move in two directions: right and down. How many possible paths are there for
+    * the robot?
+  **/
   private static int grid(int arr[][], int x, int y) {
     int n = arr.length - 1;
 
@@ -57,7 +64,10 @@ public class Chapter8 {
     }
   }
 
-  // 8.3
+  /**
+    * 8.3
+    * Write a method that returns all subsets of a set
+  **/
   private static ArrayList<ArrayList<Integer>> getSubSets(ArrayList<Integer> set) {
     ArrayList<ArrayList<Integer>> allSubSets = new ArrayList<ArrayList<Integer>>();
     int size = allSubSets.size();
@@ -87,7 +97,10 @@ public class Chapter8 {
     return allSubSets;
   }
 
-  // 8.4
+  /**
+    * 8.4
+    * Write a method to compute all permutations of a string.
+  **/
   private static ArrayList<String> permute(String str) {
     int length = str.length();
     ArrayList<String> allStrings = new ArrayList<String>();
@@ -111,44 +124,19 @@ public class Chapter8 {
     return allStrings;
   }
 
-  // 8.5
-  // private static ArrayList<String> parenth(int n) {
-  //   int j = 0;
-  //   ArrayList<String> allStrings = new ArrayList<String>();
-  //
-  //   if(n == 0) {
-  //     return allStrings;
-  //   } else if(n == 1){
-  //     allStrings.add("()");
-  //     return allStrings;
-  //   } else {
-  //     ArrayList<String> allStringsSmall = parenth(n - 1);
-  //     int length = allStringsSmall.get(0).length();
-  //     String newStr = "";
-  //     String target = "";
-  //     String before = "";
-  //     String after = "";
-  //
-  //     allStrings.add("()" + allStringsSmall.get(0));
-  //
-  //     for (String s : allStringsSmall) {
-  //       for(int i = 2; i <= length; i+=2) {
-  //         j = i - 2;
-  //         before = s.substring(0, j);
-  //         target = s.substring(j, i);
-  //         after  = s.substring(i, length);
-  //
-  //         newStr += before + "(" + target + ")" + after;
-  //         allStrings.add(newStr);
-  //         newStr = "";
-  //       }
-  //     }
-  //   }
-  //
-  //   return allStrings;
-  // }
+  /**
+    * 8.5
+    * Implement an algorithm to print all valid (e.g., properly opened and closed) combinations
+    * of n-pairs of parentheses.
 
-  // 8.5
+    * EXAMPLE:
+    *  input: 3 (e.g., 3 pairs of parentheses)
+    *  output: ()()(), ()(()), (())(), ((()))
+  **/
+  private static void parenth(int n) {
+    parenth("",n,n);
+  }
+
   private static void parenth(String str, int l, int r) {
     if(l == 0 && r == 0) {
       System.out.println(str);
@@ -164,11 +152,11 @@ public class Chapter8 {
     }
   }
 
-  private static void parenth(int n) {
-    parenth("",n,n);
-  }
-
-  // 8.7
+  /**
+    * 8.7
+    * Given an infinite number of quarters (25 cents), dimes (10 cents), nickels (5 cents) and
+    * pennies (1 cent), write code to calculate the number of ways of representing n cents.
+  **/
   private static int makeChange(int n, int denom) {
     int next_denom = 0;
     switch (denom) {
@@ -191,6 +179,4 @@ public class Chapter8 {
     }
     return ways;
   }
-
-
 }
