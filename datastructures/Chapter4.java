@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.ArrayDeque;
 import java.util.Deque;
 
-public class Chapter3 {
+public class Chapter4 {
 
   /**
     * 4.1
@@ -46,47 +46,6 @@ public class Chapter3 {
     return max;
   }
 
-  // 4.2
-  // suto code
-  // public Boolean route(Graph g, Node start, Node end) {
-  //   LinkedList<Node> list = new LinkedList<Node>();
-  //
-  //   // mark everything as not visited
-  //   for(Node n : g.getNodes()) {
-  //     n.visted = State.UNVISTED;
-  //   }
-  //
-  //   // add start to the list
-  //   start.state = State.VISITING;
-  //   list.add(start);
-  //
-  //   Node current;
-  //   while(!list.isEmpty()) {
-  //     // get the first node (on first iteration it will be start)
-  //     current = list.removeFirst();
-  //
-  //     // go through all of its neightbours
-  //     // mark as visiting
-  //     for (Node v : current.getNeighbours()) {
-  //       // if we reached the end node then were done
-  //       if(v === end) {
-  //         return true;
-  //       } else { // mark node so we will vist it on future iterations
-  //         v.state = State.VISITING;
-  //         list.add(v);
-  //       }
-  //     }
-  //
-  //     // we have visted this node so we are dont looking at it
-  //     current.state = State.VISITED;
-  //   }
-  //   return false;
-  // }
-  //
-  // private enum State {
-  //   VISTED, UNVISTED, VISITING
-  // }
-
   /**
     * 4.3
     * Given a sorted (increasing order) array, write an algorithm to create a binary tree with
@@ -118,36 +77,36 @@ public class Chapter3 {
   **/
   public static ArrayList<LinkedList<TreeNode>> createLists(TreeNode root) {
     ArrayList<LinkedList<TreeNode>> result = new ArrayList<LinkedList<TreeNode>>();
-    LinkedList<TreeNode> list = new LinkedList<TreeNode>();
-    int level = 0;
-    TreeNode current = root;
+    Queue<TreeNode> q = new LinkedList<TreeNode>();
+    LinkedList<TreeNode> list;
 
-    list.add(current);
-    result.add(level, list);
+    q.add(root);
 
-    while(true) {
-      for(int i = 0; i < result.get(level).size(); i++) {
-        current =  result.get(level).get(i);
+    while(!q.isEmpty()) {
+      ArrayList<TreeNode> nodeList = removeAll(q);
 
-        if(current != null) {
-          if(current.left !=  null) {
-            list.add(current.left);
-          }
-          if(current.right != null) {
-            list.add(current.right);
-          }
-        }
+      list = new LinkedList<TreeNode>();
+
+      for(TreeNode node : nodeList) {
+        list.add(node);
+
+        if(node.left != null) q.add(node.left);
+        if(node.right != null) q.add(node.right);
       }
-
-      if(list.size() > 0) {
-        result.add(level + 1, list);
-      } else {
-        break;
-      }
-      level++;
+      result.add(list);
     }
 
     return result;
+  }
+
+  private static ArrayList<TreeNode> removeAll(Queue<TreeNode> q) {
+    ArrayList<TreeNode> nodeList = new ArrayList<TreeNode>();
+
+    while(!q.isEmpty()) {
+      nodeList.add(q.remove());
+    }
+
+    return nodeList;
   }
 
   private static void printListOfLinkedLists(ArrayList<LinkedList<TreeNode>> listOfNodes) {
@@ -171,43 +130,46 @@ public class Chapter3 {
     bst.add(1);
     bst.add(5);
     bst.add(4);
-    bst.add(-1);
-    bst.add(6);
-    bst.add(6);
-    bst.add(2);
-    bst.add(-3);
-    bst.add(0);
-
-    System.out.println("\n Pre Order Transversal");
-    tree.preOrder();
-    System.out.println("");
-
-    System.out.println("In-Order Transversal");
-    tree.inOrder();
-    System.out.println("");
-
-    System.out.println("Post-Order Transversal");
-    tree.postOrder();
-    System.out.println("");
-
-    System.out.println("\n BFS Search: ");
-    tree.BFS();
-
-    System.out.println("\n DFS Search: ");
-    tree.DFS();
-
     BTreePrinter.printNode(tree.root);
 
-    System.out.println("Running 4.1: ");
-    System.out.println(isBalanced(tree.root));
+    // bst.add(-1);
+    // bst.add(6);
+    // bst.add(6);
+    // bst.add(2);
+    // bst.add(-3);
+    // bst.add(0);
 
-    System.out.println("Running 4.3: ");
-    int[] sortedArr = new int[] { 1, 2, 3, 4, 5 };
-    TreeNode node = createTree(sortedArr);
-    BTreePrinter.printNode(bst.root);
+    // System.out.println("\n Pre Order Transversal");
+    // tree.preOrder();
+    // System.out.println("");
+    //
+    // System.out.println("In-Order Transversal");
+    // tree.inOrder();
+    // System.out.println("");
+    //
+    // System.out.println("Post-Order Transversal");
+    // tree.postOrder();
+    // System.out.println("");
+    //
+    // System.out.println("\n BFS Search: ");
+    // tree.BFS();
+    //
+    // System.out.println("\n DFS Search: ");
+    // tree.DFS();
+    //
+    // BTreePrinter.printNode(tree.root);
+    //
+    // System.out.println("Running 4.1: ");
+    // System.out.println(isBalanced(tree.root));
+    //
+    // System.out.println("Running 4.3: ");
+    // int[] sortedArr = new int[] { 1, 2, 3, 4, 5 };
+    // TreeNode node = createTree(sortedArr);
+    // BTreePrinter.printNode(bst.root);
 
     System.out.println("Running 4.4: ");
     ArrayList<LinkedList<TreeNode>> listOfNodes = createLists(tree.root);
-    // printListOfLinkedLists(listOfNodes);
+    printListOfLinkedLists(listOfNodes);
+
   }
 }
