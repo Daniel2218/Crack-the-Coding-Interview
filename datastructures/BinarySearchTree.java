@@ -22,7 +22,7 @@ public class BinarySearchTree {
     if(tree == null) {
       tree = new TreeNode(data);
     } else {
-      if(tree.data <= data) {
+      if(data >= tree.data) {
         tree.right = add(tree.right, data);
       } else {
         tree.left = add(tree.left, data);

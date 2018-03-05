@@ -130,45 +130,44 @@ public class Chapter4 {
     bst.add(1);
     bst.add(5);
     bst.add(4);
+    bst.add(-1);
+    bst.add(6);
+    bst.add(6);
+    bst.add(2);
+    bst.add(-3);
+    bst.add(0);
+    BTreePrinter.printNode(bst.root);
+
+    System.out.println("\n Pre Order Transversal");
+    tree.preOrder();
+    System.out.println("");
+
+    System.out.println("In-Order Transversal");
+    tree.inOrder();
+    System.out.println("");
+
+    System.out.println("Post-Order Transversal");
+    tree.postOrder();
+    System.out.println("");
+
+    System.out.println("\n BFS Search: ");
+    tree.BFS();
+
+    System.out.println("\n DFS Search: ");
+    tree.DFS();
+
     BTreePrinter.printNode(tree.root);
 
-    // bst.add(-1);
-    // bst.add(6);
-    // bst.add(6);
-    // bst.add(2);
-    // bst.add(-3);
-    // bst.add(0);
+    System.out.println("Running 4.1: ");
+    System.out.println(isBalanced(tree.root));
 
-    // System.out.println("\n Pre Order Transversal");
-    // tree.preOrder();
-    // System.out.println("");
-    //
-    // System.out.println("In-Order Transversal");
-    // tree.inOrder();
-    // System.out.println("");
-    //
-    // System.out.println("Post-Order Transversal");
-    // tree.postOrder();
-    // System.out.println("");
-    //
-    // System.out.println("\n BFS Search: ");
-    // tree.BFS();
-    //
-    // System.out.println("\n DFS Search: ");
-    // tree.DFS();
-    //
-    // BTreePrinter.printNode(tree.root);
-    //
-    // System.out.println("Running 4.1: ");
-    // System.out.println(isBalanced(tree.root));
-    //
-    // System.out.println("Running 4.3: ");
-    // int[] sortedArr = new int[] { 1, 2, 3, 4, 5 };
-    // TreeNode node = createTree(sortedArr);
-    // BTreePrinter.printNode(bst.root);
+    System.out.println("Running 4.3: ");
+    int[] sortedArr = new int[] { 1, 2, 3, 4, 5 };
+    TreeNode node = createTree(sortedArr);
+    BTreePrinter.printNode(bst.root);
 
     System.out.println("Running 4.4: ");
-    ArrayList<LinkedList<TreeNode>> listOfNodes = createLists(tree.root);
+    ArrayList<LinkedList<TreeNode>> listOfNodes = createLists(bst.root);
     printListOfLinkedLists(listOfNodes);
 
   }
