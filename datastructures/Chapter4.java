@@ -109,6 +109,40 @@ public class Chapter4 {
     return nodeList;
   }
 
+  /**
+    * 4.5
+    * Write an algorithm to find the ‘next’ node (eg  , in-order successor) of a given node in
+    * a binary search tree where each node has a link to its parent
+  **/
+  public static TreeNode findSuccessor(TreeNode node) {
+    if(node != null) {
+      if(node.right != null) {
+        return getLeftMostChildOf(node.right);
+      } else {
+        while(node != null) {
+          TreeNode parrent = node.parrent;
+
+          if(parrent.left == node) {
+            return parrent;
+          } else {
+            node = parrent;
+          }
+        }
+      }
+    }
+
+    return null;
+  }
+
+  // helper function: Get the left most node the node passed in
+  private static TreeNode getLeftMostChildOf(TreeNode node) {
+    while(node.left != null) {
+      node = node.left;
+    }
+
+    return node;
+  }
+
   private static void printListOfLinkedLists(ArrayList<LinkedList<TreeNode>> listOfNodes) {
     for(LinkedList<TreeNode> list : listOfNodes) {
       for(TreeNode node : list) {
@@ -170,5 +204,8 @@ public class Chapter4 {
     ArrayList<LinkedList<TreeNode>> listOfNodes = createLists(bst.root);
     printListOfLinkedLists(listOfNodes);
 
+    System.out.println("Running 4.5: ");
+    TreeNode successor = findSuccessor(bst.root.left.right);
+    System.out.println("Successor: " + successor.data);
   }
 }

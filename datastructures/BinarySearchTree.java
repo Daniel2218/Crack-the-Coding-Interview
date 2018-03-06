@@ -1,7 +1,5 @@
 package datastructures;
 
-import datastructures.*;
-
 import java.util.ArrayList;
 import java.util.Queue;
 import java.util.LinkedList;
@@ -15,17 +13,17 @@ public class BinarySearchTree {
   public BinarySearchTree() { }
 
   public void add(int data) {
-    this.root = add(this.root, data);
+    this.root = add(this.root, null, data);
   }
 
-  private TreeNode add(TreeNode tree, int data) {
+  private TreeNode add(TreeNode tree, TreeNode parrent, int data) {
     if(tree == null) {
-      tree = new TreeNode(data);
+      tree = new TreeNode(data, parrent);
     } else {
       if(data >= tree.data) {
-        tree.right = add(tree.right, data);
+        tree.right = add(tree.right, tree, data);
       } else {
-        tree.left = add(tree.left, data);
+        tree.left = add(tree.left, tree, data);
       }
     }
 
