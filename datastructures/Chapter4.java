@@ -152,6 +152,83 @@ public class Chapter4 {
     }
   }
 
+  /**
+    * 4.6
+    * Design an algorithm and write code to find the first common ancestor of two nodes
+    * in a binary tree. Avoid storing additional nodes in a data structure. NOTE: This is not
+    * necessarily a binary search tree
+  */
+  static int TWO_NODES_FOUND = 2;
+  static int ONE_NODE_FOUND = 1;
+  static int NO_NODES_FOUND = 0;
+
+  public static TreeNode findAncestor(TreeNode root, TreeNode p, TreeNode q) {
+     if (q == p && (root.left == q || root.right == q)) {
+       return root;
+     }
+
+     int nodesFromLeft = covers(root.left, p, q); // Check left side
+
+     if (nodesFromLeft == TWO_NODES_FOUND) {
+       if(root.left == p || root.left == q) {
+         return root.left;
+       } else {
+         return findAncestor(root.left, p, q);
+       }
+     } else if (nodesFromLeft == ONE_NODE_FOUND) {
+       if (root == p) {
+         return p;
+       } else if (root == q) {
+         return q;
+       }
+     }
+
+     int nodesFromRight = covers(root.right, p, q); // Check right side
+
+     if(nodesFromRight == TWO_NODES_FOUND) {
+       if(root.right == p || root.right == q) {
+         return root.right;
+       } else {
+         return findAncestor(root.right, p, q);
+       }
+     } else if (nodesFromRight == ONE_NODE_FOUND) {
+       if (root == p) {
+         return p;
+       } else if (root == q) {
+         return q;
+       }
+     }
+
+     if (nodesFromLeft == ONE_NODE_FOUND &&
+         nodesFromRight == ONE_NODE_FOUND) {
+       return root;
+     } else {
+       return null;
+     }
+   }
+
+  // Checks how many “special” nodes are located under this root
+  private static int covers(TreeNode root, TreeNode p, TreeNode q) {
+    int ret = NO_NODES_FOUND;
+
+    if (root == null) {
+      return ret;
+    }
+
+    if (root == p || root == q) {
+      ret += 1;
+    }
+
+    ret += covers(root.left, p, q);
+
+    // Found p and q
+    if(ret == TWO_NODES_FOUND) {
+      return ret;
+    }
+
+    return ret + covers(root.right, p, q);
+  }
+
   public static void main(String args[]) {
     BinaryTree tree = new BinaryTree();
     tree.add(1);
@@ -190,22 +267,29 @@ public class Chapter4 {
     System.out.println("\n DFS Search: ");
     tree.DFS();
 
+    System.out.println("\n STARTING QUESTIONS: ");
     BTreePrinter.printNode(tree.root);
-
-    System.out.println("Running 4.1: ");
-    System.out.println(isBalanced(tree.root));
-
-    System.out.println("Running 4.3: ");
-    int[] sortedArr = new int[] { 1, 2, 3, 4, 5 };
-    TreeNode node = createTree(sortedArr);
     BTreePrinter.printNode(bst.root);
 
-    System.out.println("Running 4.4: ");
-    ArrayList<LinkedList<TreeNode>> listOfNodes = createLists(bst.root);
-    printListOfLinkedLists(listOfNodes);
+    // System.out.println("Running 4.1: ");
+    // System.out.println(isBalanced(tree.root));
+    //
+    // System.out.println("Running 4.3: ");
+    // int[] sortedArr = new int[] { 1, 2, 3, 4, 5 };
+    // TreeNode node = createTree(sortedArr);
+    //
+    // System.out.println("Running 4.4: ");
+    // ArrayList<LinkedList<TreeNode>> listOfNodes = createLists(bst.root);
+    // printListOfLinkedLists(listOfNodes);
+    //
+    // System.out.println("Running 4.5: ");
+    // TreeNode successor = findSuccessor(bst.root.left.right);
+    // System.out.println("Successor: " + successor.data);
 
-    System.out.println("Running 4.5: ");
-    TreeNode successor = findSuccessor(bst.root.left.right);
-    System.out.println("Successor: " + successor.data);
+    System.out.println("Running 4.6: ");
+    TreeNode ancestor = findAncestor(tree.root, tree.root.left.left, tree.root.right);
+    System.out.println("Node 1: " + tree.root.left.left.data);
+    System.out.println("Node 2: " + tree.root.right.data);
+    System.out.println("Ancestor: " + ancestor.data);
   }
 }
