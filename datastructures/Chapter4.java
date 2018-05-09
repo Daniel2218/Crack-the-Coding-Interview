@@ -231,6 +231,79 @@ public class Chapter4 {
     return ret + covers(root.right, p, q);
   }
 
+  /**
+    * 4.7
+    * You  have  two  very  large  binary  trees: T1,  with  millions  of  nodes,  and T2,  with  hundreds of nodes
+    * Create an algorithm to decide if T2 is a subtree of T1
+    * Worst  case  runtime  is  at most O(n * m), where n and m are the sizes of trees T1 and T2, respectively
+    * If k is the number of occurrences of T2’s root in T1, the worst case runtime can be characterized as O(n + k * m)
+  */
+  public static boolean isSubTree(TreeNode t1, TreeNode t2) {
+    if(t1 == null || t2 == null) {
+      return false;
+    }
+
+    Queue<TreeNode> q = new LinkedList<TreeNode>();
+    q.add(t1);
+
+    while(!q.isEmpty()) {
+      TreeNode node = q.remove();
+
+      if(node.data == t2.data) {
+        if(compareTrees(node, t2)) {
+          return true;
+        }
+      }
+
+      if(node.left != null) {
+        q.add(node.left);
+      }
+
+      if(node.right != null) {
+        q.add(node.right);
+      }
+    }
+
+    return false;
+  }
+
+  /**
+    * helper function that will that will return true if t2 is subtree of t1 starting at t1
+  */
+  private static boolean compareTrees(TreeNode t1, TreeNode t2) {
+    Queue<TreeNode> q1 = new LinkedList<TreeNode>();
+    Queue<TreeNode> q2 = new LinkedList<TreeNode>();
+
+    q1.add(t1);
+    q2.add(t2);
+
+    while(!(q2.isEmpty())) {
+      if(q1.isEmpty()) {
+        return false;
+      }
+
+      TreeNode node1 = q1.remove();
+      TreeNode node2 = q2.remove();
+
+      if(node1.data != node2.data) {
+        return false;
+      }
+
+      if(node1.left != null && node2.left != null) {
+        q1.add(node1.left);
+        q2.add(node2.left);
+      }
+
+      if(node1.right != null && node2.right != null) {
+        q1.add(node1.right);
+        q2.add(node2.right);
+      }
+    }
+
+    return true;
+  }
+
+
   public static void main(String args[]) {
     BinaryTree tree = new BinaryTree();
     tree.add(1);
@@ -290,8 +363,24 @@ public class Chapter4 {
 
     System.out.println("Running 4.6: ");
     TreeNode ancestor = findAncestor(tree.root, tree.root.left.left, tree.root.right);
-    System.out.println("Node 1: " + tree.root.left.left.data);
-    System.out.println("Node 2: " + tree.root.right.data);
     System.out.println("Ancestor: " + ancestor.data);
+
+    System.out.println("Running 4.7: ");
+    BinaryTree tree1 = new BinaryTree();
+    tree1.add(1);
+    tree1.add(2);
+    tree1.add(3);
+    tree1.add(4);
+    tree1.add(5);
+
+    BinaryTree tree2 = new BinaryTree();
+    tree2.add(3);
+    tree2.add(4);
+    tree2.add(5);
+
+    BTreePrinter.printNode(tree1.root);
+    BTreePrinter.printNode(tree2.root);
+
+    System.out.println("T2 is is a sub tree: " + isSubTree(tree1.root, tree2.root));
   }
 }
