@@ -163,6 +163,7 @@ public class Chapter4 {
   static int NO_NODES_FOUND = 0;
 
   public static TreeNode findAncestor(TreeNode root, TreeNode p, TreeNode q) {
+     // q == p: only looking for one node
      if (q == p && (root.left == q || root.right == q)) {
        return root;
      }
@@ -173,6 +174,7 @@ public class Chapter4 {
        if(root.left == p || root.left == q) {
          return root.left;
        } else {
+         // there may be a closer ancestor
          return findAncestor(root.left, p, q);
        }
      } else if (nodesFromLeft == ONE_NODE_FOUND) {
