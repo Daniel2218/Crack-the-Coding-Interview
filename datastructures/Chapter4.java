@@ -303,69 +303,42 @@ public class Chapter4 {
     return true;
   }
 
+  /**
+    * 4.8
+    *
+    * You are given a binary tree in which each node contains a value. Design an algorithm
+    * to print all paths which sum up to that value. Note that it can be any path in the tree
+    * - it does not have to start at the root.
+  */
+  public static void findSum(TreeNode head, int sum, ArrayList<Integer> buffer, int level) {
+    if (head == null) return;
+    int tmp = sum;
+
+    buffer.add(head.data);
+
+    for (int i = level;i >- 1; i--){
+      tmp -= buffer.get(i);
+      if (tmp == 0) {
+        print(buffer, i, level);
+      }
+    }
+
+    ArrayList<Integer> c1 = (ArrayList<Integer>) buffer.clone();
+    ArrayList<Integer> c2 = (ArrayList<Integer>) buffer.clone();
+
+    findSum(head.left, sum, c1, level + 1);
+    findSum(head.right, sum, c2, level + 1);
+  }
+
+  private static void print(ArrayList<Integer> buffer, int level, int i2) {
+    for (int i = level; i <= i2; i++) {
+      System.out.print(buffer.get(i) + " ");
+    }
+
+    System.out.println("");
+  }
 
   public static void main(String args[]) {
-    BinaryTree tree = new BinaryTree();
-    tree.add(1);
-    tree.add(2);
-    tree.add(3);
-    tree.add(4);
-    tree.add(5);
-
-    BinarySearchTree bst = new BinarySearchTree();
-    bst.add(1);
-    bst.add(5);
-    bst.add(4);
-    bst.add(-1);
-    bst.add(6);
-    bst.add(6);
-    bst.add(2);
-    bst.add(-3);
-    bst.add(0);
-    BTreePrinter.printNode(bst.root);
-
-    System.out.println("\n Pre Order Transversal");
-    tree.preOrder();
-    System.out.println("");
-
-    System.out.println("In-Order Transversal");
-    tree.inOrder();
-    System.out.println("");
-
-    System.out.println("Post-Order Transversal");
-    tree.postOrder();
-    System.out.println("");
-
-    System.out.println("\n BFS Search: ");
-    tree.BFS();
-
-    System.out.println("\n DFS Search: ");
-    tree.DFS();
-
-    System.out.println("\n STARTING QUESTIONS: ");
-    BTreePrinter.printNode(tree.root);
-    BTreePrinter.printNode(bst.root);
-
-    // System.out.println("Running 4.1: ");
-    // System.out.println(isBalanced(tree.root));
-    //
-    // System.out.println("Running 4.3: ");
-    // int[] sortedArr = new int[] { 1, 2, 3, 4, 5 };
-    // TreeNode node = createTree(sortedArr);
-    //
-    // System.out.println("Running 4.4: ");
-    // ArrayList<LinkedList<TreeNode>> listOfNodes = createLists(bst.root);
-    // printListOfLinkedLists(listOfNodes);
-    //
-    // System.out.println("Running 4.5: ");
-    // TreeNode successor = findSuccessor(bst.root.left.right);
-    // System.out.println("Successor: " + successor.data);
-
-    System.out.println("Running 4.6: ");
-    TreeNode ancestor = findAncestor(tree.root, tree.root.left.left, tree.root.right);
-    System.out.println("Ancestor: " + ancestor.data);
-
-    System.out.println("Running 4.7: ");
     BinaryTree tree1 = new BinaryTree();
     tree1.add(1);
     tree1.add(2);
@@ -378,9 +351,66 @@ public class Chapter4 {
     tree2.add(4);
     tree2.add(5);
 
+    BinarySearchTree bst = new BinarySearchTree();
+    bst.add(1);
+    bst.add(5);
+    bst.add(4);
+    bst.add(-1);
+    bst.add(6);
+    bst.add(6);
+    bst.add(2);
+    bst.add(-3);
+    bst.add(0);
+
+    System.out.println("\n Pre Order Transversal");
+    tree1.preOrder();
+    System.out.println("");
+
+    System.out.println("In-Order Transversal");
+    tree1.inOrder();
+    System.out.println("");
+
+    System.out.println("Post-Order Transversal");
+    tree1.postOrder();
+    System.out.println("");
+
+    System.out.println("\n BFS Search: ");
+    tree1.BFS();
+
+    System.out.println("\n DFS Search: ");
+    tree1.DFS();
+
+    System.out.println("\n STARTING QUESTIONS: ");
+    BTreePrinter.printNode(tree1.root);
+    BTreePrinter.printNode(bst.root);
+
+    System.out.println("Running 4.1: ");
+    System.out.println(isBalanced(tree1.root));
+
+    System.out.println("Running 4.3: ");
+    int[] sortedArr = new int[] { 1, 2, 3, 4, 5 };
+    TreeNode node = createTree(sortedArr);
+
+    System.out.println("Running 4.4: ");
+    ArrayList<LinkedList<TreeNode>> listOfNodes = createLists(bst.root);
+    printListOfLinkedLists(listOfNodes);
+
+    System.out.println("Running 4.5: ");
+    TreeNode successor = findSuccessor(bst.root.left.right);
+    System.out.println("Successor: " + successor.data);
+
+    System.out.println("Running 4.6: ");
+    TreeNode ancestor = findAncestor(tree1.root, tree1.root.left.left, tree1.root.right);
+    System.out.println("Ancestor: " + ancestor.data);
+
+    System.out.println("Running 4.7: ");
     BTreePrinter.printNode(tree1.root);
     BTreePrinter.printNode(tree2.root);
 
-    System.out.println("T2 is is a sub tree: " + isSubTree(tree1.root, tree2.root));
+    System.out.println("T2 is is a sub tree1: " + isSubTree(tree1.root, tree2.root));
+
+    System.out.println("Running 4.8: ");
+    ArrayList<Integer> buffer = new ArrayList<Integer>();
+    findSum(tree1.root, 6, buffer, 0);
   }
 }
