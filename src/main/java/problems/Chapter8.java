@@ -154,6 +154,13 @@ public class Chapter8 {
     return ways;
   }
 
+  /**
+    8.8
+    
+    Write  an  algorithm  to  print  all  ways  of  arranging  eight  queens  on  a  chess  board  so
+    that none of them share the same row, column or diagona
+  */
+
   public static void main(String args[]) {
     ArrayList<ArrayList<Integer>> subSets = new ArrayList<ArrayList<Integer>>();
     ArrayList<Integer> list1 = new ArrayList<Integer>();

@@ -47,6 +47,55 @@ public class Chapter4 {
   }
 
   /**
+    * 4.2
+    * Given a directed graph, design an algorithm to find out whether there is a route
+    * between two nodes
+
+    * NOTE: Will implement a directed graph later.
+  **/
+
+  // by utilizing this enum, we can prevent cycles
+  public enum State {
+      Unvisted, Visted, Visiting
+  }
+
+  public boolean search(Graph g, Node start, Node end) {
+      if(start == null || end == null) {
+        return false;
+      } else if(start.equals(end)) {
+        return true;
+      }
+
+      // set all nodes to unvisted
+      for(Node n : g.getNodes()) {
+        n.state = State.Unvisted;
+      }
+      start.state = State.Visiting;
+
+      Queue<Node> q = new LinkedList<Node>();
+      q.add(start);
+
+      while(!q.isEmpty()) {
+        Node nodeFromQ = q.remove();
+
+        for(Node n : nodeFromQ.getAdjacent()) {
+          if(n.state == State.unvisted) {
+            if(n.equals(end)) {
+              return true;
+            }
+
+            n.state = State.Visiting;
+            q.add(n);
+          }
+        }
+
+        n.state = State.Visted;
+      }
+
+      return false;
+  }
+
+  /**
     * 4.3
     * Given a sorted (increasing order) array, write an algorithm to create a binary tree with
     * minimal height.
