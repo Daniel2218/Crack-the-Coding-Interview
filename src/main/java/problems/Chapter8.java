@@ -1,4 +1,4 @@
-package algorithms;
+package problems;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,17 +24,47 @@ public class Chapter8 {
     * only move in two directions: right and down. How many possible paths are there for
     * the robot?
   **/
-  private static int grid(int arr[][], int x, int y) {
-    int n = arr.length - 1;
-
-    if(x > n || y > n) {
+  public static int paths(int n) {
+    if(n <= 0) {
       return 0;
-    } else if(x == n && y == n) {
+    } else if(n == 1) {
+      return 1;
+    }
+
+    return paths(0, 0, n);
+  }
+
+  private static int paths(int x, int y, int n) {
+    int paths = 0;
+    int leftStatus = isPath(x + 1, y, n);
+    int rightStatus = isPath(x, y + 1, n);
+
+    if(leftStatus == 0) {
+      paths += paths(x + 1, y, n);
+    }
+
+    if(rightStatus == 0) {
+      paths += paths(x, y + 1, n);
+    }
+
+    if(leftStatus == 1) {
+      paths++;
+    }
+
+    if(rightStatus == 1) {
+      paths++;
+    }
+
+    return paths;
+  }
+
+  private static int isPath(int x, int y, int n) {
+    if(x > n - 1 || y > n - 1) {
+      return -1;
+    } else if (x == n - 1 && y == n-1) {
       return 1;
     } else {
-      int right = grid(arr, x + 1, y);
-      int down = grid(arr, x, y + 1);
-      return right + down;
+      return 0;
     }
   }
 
@@ -156,7 +186,7 @@ public class Chapter8 {
 
   /**
     8.8
-    
+
     Write  an  algorithm  to  print  all  ways  of  arranging  eight  queens  on  a  chess  board  so
     that none of them share the same row, column or diagona
   */
@@ -181,10 +211,10 @@ public class Chapter8 {
     System.out.println(getFibNumber(5));
 
     System.out.println("Running 8.2: ");
-    // System.out.println(grid(arr, 0, 0));
+    System.out.println(paths(4));
 
     System.out.println("Running 8.3: ");
-    System.out.println(getSubSets(list));
+    // System.out.println(getSubSets(list));
 
     System.out.println("Running 8.4: ");
     System.out.println(permute("abcde"));
