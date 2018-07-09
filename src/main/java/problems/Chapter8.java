@@ -250,6 +250,29 @@ public class Chapter8 {
     Write  an  algorithm  to  print  all  ways  of  arranging  eight  queens  on  a  chess  board  so
     that none of them share the same row, column or diagona
   */
+  int columnForRow[] = new int[8];
+
+  private boolean check(int row) {
+    for(int i = 0; i < row; i++) {
+      int diff = Math.abs(columnForRow[i] - columnForRow[row]);
+      if(diff == 0 || diff == row - i) return false;
+    }
+    return true;
+  }
+
+  public void PlaceQueen(int row) {
+    if(row == 8) {
+      // printBoard(); unimplemented function that would print the printBoard
+      return;
+    }
+
+    for(int i = 0; i < 8; i++) {
+      columnForRow[row] = i;
+      if(check(row)) {
+        PlaceQueen(row+1);
+      }
+    }
+  }
 
   public static void main(String args[]) {
     ArrayList<ArrayList<Integer>> subSets = new ArrayList<ArrayList<Integer>>();
