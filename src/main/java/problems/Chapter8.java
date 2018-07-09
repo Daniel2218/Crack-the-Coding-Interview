@@ -2,6 +2,7 @@ package problems;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.awt.Point;
 
 public class Chapter8 {
   /**
@@ -31,20 +32,30 @@ public class Chapter8 {
       return 1;
     }
 
-    return paths(0, 0, n);
+    return paths(0, 0, n, null);
   }
 
-  private static int paths(int x, int y, int n) {
+  public static int paths(int n, List<Point> offLimits) {
+    if(n <= 0) {
+      return 0;
+    } else if(n == 1) {
+      return 1;
+    }
+
+    return paths(0, 0, n, offLimits);
+  }
+
+  private static int paths(int x, int y, int n, List<Point> offLimits) {
     int paths = 0;
-    int leftStatus = isPath(x + 1, y, n);
-    int rightStatus = isPath(x, y + 1, n);
+    int leftStatus = isPath(x + 1, y, n, offLimits);
+    int rightStatus = isPath(x, y + 1, n, offLimits);
 
     if(leftStatus == 0) {
-      paths += paths(x + 1, y, n);
+      paths += paths(x + 1, y, n, offLimits);
     }
 
     if(rightStatus == 0) {
-      paths += paths(x, y + 1, n);
+      paths += paths(x, y + 1, n, offLimits);
     }
 
     if(leftStatus == 1) {
@@ -58,14 +69,32 @@ public class Chapter8 {
     return paths;
   }
 
-  private static int isPath(int x, int y, int n) {
+  private static int isPath(int x, int y, int n, List<Point> offLimits) {
     if(x > n - 1 || y > n - 1) {
       return -1;
     } else if (x == n - 1 && y == n-1) {
       return 1;
+    } else if (is_free(x, y, n, offLimits)) {
+      return -1;
     } else {
       return 0;
     }
+  }
+
+  private static boolean is_free(int x, int y, int n, List<Point> offLimits) {
+    if(offLimits == null) {
+      return false;
+    }
+
+    for(int i = 0; i < offLimits.size(); i++) {
+      Point p = offLimits.get(i);
+
+      if(p.getX() == x && p.getY() == y) {
+        return true;
+      }
+    }
+
+    return false;
   }
 
   /**
@@ -157,6 +186,37 @@ public class Chapter8 {
   }
 
   /**
+    8.6
+    Implement the “paint fill” function that one might see on many image editing programs.
+    That is, given a screen (represented by a 2-dimensional array of Colors), a
+    point, and a new color, fill in the surrounding area until you hit a border of that color.
+  */
+  enum Color {
+    Black, White, Red, Yellow, Green
+  }
+
+  boolean PaintFill(Color[][] screen, int x, int y, Color ocolor, Color ncolor) {
+      if(x < 0 || x >= screen[0].length ||
+         y < 0 || y >= screen.length) {
+           return false;
+      }
+
+      if(screen[y][x] == ocolor) {
+        screen[y][x] = ncolor;
+        PaintFill(screen, x + 1, y, ocolor. ncolor); // left
+        PaintFill(screen, x - 1, y, ocolor. ncolor); // right
+        PaintFill(screen, x, y - 1, ocolor. ncolor); // top
+        PaintFill(screen, x, y + 1, ocolor. ncolor); // bottom
+      }
+
+      return true;
+  }
+
+  boolean PaintFill(Color[][] screen, int x, int y, Color ncolor){
+    return PaintFill(screen, x, y, screen[y][x], ncolor);
+  }
+
+  /**
     * 8.7
     * Given an infinite number of quarters (25 cents), dimes (10 cents), nickels (5 cents) and
     * pennies (1 cent), write code to calculate the number of ways of representing n cents.
@@ -205,6 +265,9 @@ public class Chapter8 {
     list2.add(3);
     subSets.add(list2);
 
+    List<Point> offLimits = new ArrayList<Point>();
+    offLimits.add(new Point(1,1));
+
     int arr[][] = new int[3][3];
 
     System.out.println("Running 8.1: ");
@@ -212,6 +275,9 @@ public class Chapter8 {
 
     System.out.println("Running 8.2: ");
     System.out.println(paths(4));
+
+    System.out.println("Running 8.2 With offLimits: ");
+    System.out.println(paths(3, offLimits));
 
     System.out.println("Running 8.3: ");
     // System.out.println(getSubSets(list));
