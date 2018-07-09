@@ -125,13 +125,13 @@ class Chapter9 {
     System.out.println("Running 9.5");
     System.out.println(find(arr,"ballcar"));
 
-    arr[][] = new int[2][2];
-    arr[0][0]  = 1;
-    arr[0][1]  = 2;
-    arr[1][0]  = 3;
-    arr[1][1]  = 4;
+    int[][] list = new int[2][2];
+    list[0][0]  = 1;
+    list[0][1]  = 2;
+    list[1][0]  = 3;
+    list[1][1]  = 4;
 
     System.out.println("Running 9.6");
-    System.out.println(findValue(arr,1,2,2));
+    System.out.println(findValue(list,1,2,2));
   }
 }

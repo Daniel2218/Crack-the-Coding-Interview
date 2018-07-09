@@ -59,41 +59,41 @@ public class Chapter4 {
       Unvisted, Visted, Visiting
   }
 
-  public boolean search(Graph g, Node start, Node end) {
-      if(start == null || end == null) {
-        return false;
-      } else if(start.equals(end)) {
-        return true;
-      }
-
-      // set all nodes to unvisted
-      for(Node n : g.getNodes()) {
-        n.state = State.Unvisted;
-      }
-      start.state = State.Visiting;
-
-      Queue<Node> q = new LinkedList<Node>();
-      q.add(start);
-
-      while(!q.isEmpty()) {
-        Node nodeFromQ = q.remove();
-
-        for(Node n : nodeFromQ.getAdjacent()) {
-          if(n.state == State.unvisted) {
-            if(n.equals(end)) {
-              return true;
-            }
-
-            n.state = State.Visiting;
-            q.add(n);
-          }
-        }
-
-        n.state = State.Visted;
-      }
-
-      return false;
-  }
+//  public boolean search(Graph g, Node start, Node end) {
+//      if(start == null || end == null) {
+//        return false;
+//      } else if(start.equals(end)) {
+//        return true;
+//      }
+//
+//      // set all nodes to unvisted
+//      for(Node n : g.getNodes()) {
+//        n.state = State.Unvisted;
+//      }
+//      start.state = State.Visiting;
+//
+//      Queue<Node> q = new LinkedList<Node>();
+//      q.add(start);
+//
+//      while(!q.isEmpty()) {
+//        Node nodeFromQ = q.remove();
+//
+//        for(Node n : nodeFromQ.getAdjacent()) {
+//          if(n.state == State.unvisted) {
+//            if(n.equals(end)) {
+//              return true;
+//            }
+//
+//            n.state = State.Visiting;
+//            q.add(n);
+//          }
+//        }
+//
+//        n.state = State.Visted;
+//      }
+//
+//      return false;
+//  }
 
   /**
     * 4.3

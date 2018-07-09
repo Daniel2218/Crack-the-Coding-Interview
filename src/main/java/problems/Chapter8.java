@@ -3,6 +3,7 @@ package problems;
 import java.util.ArrayList;
 import java.util.List;
 import java.awt.Point;
+import java.awt.Color;
 
 public class Chapter8 {
   /**
@@ -191,30 +192,30 @@ public class Chapter8 {
     That is, given a screen (represented by a 2-dimensional array of Colors), a
     point, and a new color, fill in the surrounding area until you hit a border of that color.
   */
-  enum Color {
-    Black, White, Red, Yellow, Green
-  }
-
-  boolean PaintFill(Color[][] screen, int x, int y, Color ocolor, Color ncolor) {
-      if(x < 0 || x >= screen[0].length ||
-         y < 0 || y >= screen.length) {
-           return false;
-      }
-
-      if(screen[y][x] == ocolor) {
-        screen[y][x] = ncolor;
-        PaintFill(screen, x + 1, y, ocolor. ncolor); // left
-        PaintFill(screen, x - 1, y, ocolor. ncolor); // right
-        PaintFill(screen, x, y - 1, ocolor. ncolor); // top
-        PaintFill(screen, x, y + 1, ocolor. ncolor); // bottom
-      }
-
-      return true;
-  }
-
-  boolean PaintFill(Color[][] screen, int x, int y, Color ncolor){
-    return PaintFill(screen, x, y, screen[y][x], ncolor);
-  }
+//  enum Color {
+//    Black, White, Red, Yellow, Green
+//  }
+//
+//  boolean PaintFill(Color[][] screen, int x, int y, Color ocolor, Color ncolor) {
+//      if(x < 0 || x >= screen[0].length ||
+//         y < 0 || y >= screen.length) {
+//           return false;
+//      }
+//
+//      if(screen[y][x] == ocolor) {
+//        screen[y][x] = ncolor;
+//        PaintFill(screen, x + 1, y, ocolor. ncolor); // left
+//        PaintFill(screen, x - 1, y, ocolor. ncolor); // right
+//        PaintFill(screen, x, y - 1, ocolor. ncolor); // top
+//        PaintFill(screen, x, y + 1, ocolor. ncolor); // bottom
+//      }
+//
+//      return true;
+//  }
+//
+//  boolean PaintFill(Color[][] screen, int x, int y, Color ncolor){
+//    return PaintFill(screen, x, y, screen[y][x], ncolor);
+//  }
 
   /**
     * 8.7
